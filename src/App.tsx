@@ -57,6 +57,7 @@ import {
   type Station,
 } from "./lib";
 import { useRadio } from "./use-radio";
+import { AmbientSound } from "./ambient-sound";
 import {
   migrateCatalog,
   sortStations,
@@ -273,7 +274,7 @@ export default function App() {
     if (radio.unavailable) catalogHealth.mark(station, video, true);
     else if (playing) catalogHealth.mark(station, video, false);
   }, [radio.unavailable, playing, station.url, video, catalogHealth.mark]);
-  const audios = useRef(new Map<string, HTMLAudioElement>());
+  const audios = useRef(new Map<string, AmbientSound>());
   const importRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
@@ -302,10 +303,9 @@ export default function App() {
   useEffect(
     () => () => {
       for (const audio of audios.current.values()) {
-        audio.pause();
-        audio.removeAttribute("src");
-        audio.load();
+        audio.stop();
       }
+      audios.current.clear();
     },
     [],
   );
@@ -414,38 +414,40 @@ export default function App() {
   function releaseSound(id: string) {
     const audio = audios.current.get(id);
     if (audio) {
-      audio.pause();
-      audio.removeAttribute("src");
-      audio.load();
+      audio.stop();
       audios.current.delete(id);
     }
   }
   async function toggleSound(id: string) {
-    if (soundActive.includes(id)) {
+    if (audios.current.has(id)) {
       releaseSound(id);
       setSoundActive((x) => x.filter((s) => s !== id));
       return;
     }
     const sound = sounds.find((s) => s[0] === id)!;
-    let audio = audios.current.get(id);
-    if (!audio) {
-      audio = new Audio(`${reference}/sounds/soundscapes/${sound[2]}.wav`);
-      audio.loop = true;
-      audio.preload = "none";
-      audios.current.set(id, audio);
-    }
-    audio.volume = (((soundVolumes[id] ?? 50) / 100) * master) / 100;
-    try {
-      await audio.play();
-      setSoundActive((x) => (x.includes(id) ? x : [...x, id]));
-    } catch {
+    const failed = () => {
+      // An old request must not stop a newly started instance of the same sound.
+      if (audios.current.get(id) !== audio) return;
       releaseSound(id);
+      setSoundActive((x) => x.filter((s) => s !== id));
       setNotice(
         t(
           "Impossible de lire « {name} ». Vérifiez votre connexion puis réessayez.",
           { name: t(sound[1]) },
         ),
       );
+    };
+    const audio = new AmbientSound(
+      `${reference}/sounds/soundscapes/${sound[2]}.wav`,
+      failed,
+    );
+    audios.current.set(id, audio);
+    setSoundActive((x) => [...x, id]);
+    audio.volume = (((soundVolumes[id] ?? 50) / 100) * master) / 100;
+    try {
+      await audio.play();
+    } catch {
+      failed();
     }
   }
   async function toggleFullscreen() {

@@ -60,3 +60,27 @@ so ownership verification and sitemap submission have not been claimed as done.
 The optional `GOOGLE_SITE_VERIFICATION` repository variable supports Google's
 HTML-tag method. Follow `seo.md` to submit the sitemap from the owner's account.
 Lighthouse SEO is a technical audit, not a Google ranking or indexing guarantee.
+
+## Ambient loop correction — 26 October 2026
+
+All twelve ambiences now use two preloaded media elements with an equal-power
+overlap of up to 1.5 seconds. The incoming recording starts before the outgoing
+one ends, hiding the native media-loop restart. Fade progress follows playback
+time, and both voices follow the individual and master volumes. Stopping a sound
+releases both sources, listeners and the fade timer, including during loading.
+The original remote WAV URLs are retained.
+
+- 76 tests pass, including overlap coverage for every ambience, successive loops,
+  mixer changes, delayed callbacks, short recordings, cancellation and failures.
+- Production build and static checks pass.
+- Chrome with the production build and original remote files: 43 seconds of
+  natural fireplace playback cover three transitions. Both voices are never
+  paused together; the sum of their squared gains stays at 0.140625 (the default
+  mixer setting) throughout the transitions. This measures playback continuity
+  and fade gains, rather than the recording's naturally varying loudness.
+- The other eleven remote recordings complete their overlaps and handoffs in
+  Chrome at accelerated playback speed. Stop-all releases every media source,
+  with no JavaScript errors.
+- With the fireplace requests delayed, rapid start/stop/start keeps the latest
+  playback alive. Stop-all during loading produces neither a later restart nor
+  a stale playback error.
