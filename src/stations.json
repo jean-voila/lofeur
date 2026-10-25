@@ -1,0 +1,128 @@
+[
+  {
+    "id": "lofi",
+    "name": "Lofi hip hop",
+    "url": "https://www.youtube.com/watch?v=rFZHOHl-L8A",
+    "description": "beats to relax/study to 📚",
+    "cover": "https://cdn.lofigirl.com/3-1.webp"
+  },
+  {
+    "id": "synthwave",
+    "name": "Synthwave",
+    "url": "https://www.youtube.com/watch?v=4xDzrJKXOOY",
+    "description": "beats to chill/game to 🌌",
+    "cover": "https://cdn.lofigirl.com/synthwave_cover.webp"
+  },
+  {
+    "id": "halloween-lofi",
+    "name": "Halloween lofi",
+    "url": "https://www.youtube.com/watch?v=1-LpQekNa9g",
+    "description": "spooky beats to get chills to 🧟‍♀️",
+    "cover": "https://cdn.lofigirl.com/halloween_lofi.png"
+  },
+  {
+    "id": "lofi-sleep",
+    "name": "sleep lofi",
+    "url": "https://www.youtube.com/watch?v=VAlMDl00mYY",
+    "description": "relaxing music to sleep/dream to 🌌",
+    "cover": "https://cdn.lofigirl.com/lofi_sleep_2.jpg"
+  },
+  {
+    "id": "jazz-lofi",
+    "name": "Jazz lofi",
+    "url": "https://www.youtube.com/watch?v=E2vONfzoyRI",
+    "description": "beats to chill/study to 🎷",
+    "cover": "https://cdn.lofigirl.com/jazz_lofi_cover.webp"
+  },
+  {
+    "id": "lofi-girl",
+    "name": "Asian lofi",
+    "url": "https://www.youtube.com/watch?v=1Tl2FtV06qo",
+    "description": "beats to relax/study to ⛩️",
+    "cover": "https://cdn.lofigirl.com/asian_lofi.jpg"
+  },
+  {
+    "id": "dark-ambient",
+    "name": "dark ambient",
+    "url": "https://www.youtube.com/watch?v=S_MOd40zlYU",
+    "description": "music to escape/dream to 🌃",
+    "cover": "https://cdn.lofigirl.com/dark_amb.png"
+  },
+  {
+    "id": "sleep-ambient",
+    "name": "deep sleep music",
+    "url": "https://www.youtube.com/watch?v=nI725iVsyoQ",
+    "description": "calm to sleep & dream to 🌌",
+    "cover": "https://cdn.lofigirl.com/spotify_playlist_cover_73.webp"
+  },
+  {
+    "id": "peaceful-piano",
+    "name": "relaxing piano",
+    "url": "https://www.youtube.com/watch?v=N0snMcR6aaA",
+    "description": "calm music to focus to 🎹",
+    "cover": "https://cdn.lofigirl.com/calm_piano.png"
+  },
+  {
+    "id": "medieval",
+    "name": "medieval lofi",
+    "url": "https://www.youtube.com/watch?v=IxPANmjPaek",
+    "description": "beats to scribe manuscripts to 🏰",
+    "cover": "https://cdn.lofigirl.com/medieval_lofi.jpg"
+  },
+  {
+    "id": "summer-restful-holidays",
+    "name": "summer lofi",
+    "url": "https://www.youtube.com/watch?v=0muHFBSiybw",
+    "description": "music to put you in a better mood ☀️",
+    "cover": "https://cdn.lofigirl.com/artwork-440x440.jpg"
+  },
+  {
+    "id": "relaxing-jazz",
+    "name": "relaxing jazz",
+    "url": "https://www.youtube.com/watch?v=A8jDx9TLMQc",
+    "description": "to study/chill to🌹",
+    "cover": "https://cdn.lofigirl.com/jazz-2.png"
+  },
+  {
+    "id": "classical-lofi",
+    "name": "classical music",
+    "url": "https://www.youtube.com/watch?v=jXAEIWcGXwE",
+    "description": "relaxing songs to read/study to 🎻",
+    "cover": "https://cdn.lofigirl.com/classical_radio.png"
+  },
+  {
+    "id": "synth-ambient",
+    "name": "synth ambient",
+    "url": "https://www.youtube.com/watch?v=GSfT7H87zq4",
+    "description": "deep space music to sleep to 🌌",
+    "cover": "https://cdn.lofigirl.com/synth_ambient.jpg"
+  },
+  {
+    "id": "chill-guitar",
+    "name": "chill guitar",
+    "url": "https://www.youtube.com/watch?v=E_XmwjgRLz8",
+    "description": "music to study/relax to 🎸",
+    "cover": "https://cdn.lofigirl.com/chill_guitar.png"
+  },
+  {
+    "id": "bossa-lofi",
+    "name": "bossa lofi",
+    "url": "https://www.youtube.com/watch?v=56llPN9tS88",
+    "description": "chill music for relaxing days 🌴",
+    "cover": "https://cdn.lofigirl.com/bossa_lofi.jpg"
+  },
+  {
+    "id": "sad-lofi",
+    "name": "sad lofi",
+    "url": "https://www.youtube.com/watch?v=CwPCy1GLS38",
+    "description": "beats for rainy days ☔",
+    "cover": "https://cdn.lofigirl.com/sad_lofi.jpg"
+  },
+  {
+    "id": "christmas-lofi",
+    "name": "christmas lofi",
+    "url": "https://www.youtube.com/watch?v=XSXEaikz0Bc",
+    "description": "to get festive to 🎄",
+    "cover": "https://cdn.lofigirl.com/noel_cover-1.png"
+  }
+]
