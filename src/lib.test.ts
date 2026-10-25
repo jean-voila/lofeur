@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { advanceTimer, duration, isStations, youtubeId } from "./lib";
-import stations from "./stations.json";
+import stations from "./catalog";
 describe("YouTube URL handling", () => {
   it.each([
     "https://www.youtube.com/watch?v=rFZHOHl-L8A&list=test",
@@ -20,8 +20,8 @@ describe("YouTube URL handling", () => {
   ])("rejects %s", (url) => expect(youtubeId(url)).toBeNull());
 });
 describe("station imports", () => {
-  it("accepts all eighteen defaults", () => {
-    expect(stations).toHaveLength(18);
+  it("accepts all default radios and mixes", () => {
+    expect(stations.length).toBeGreaterThanOrEqual(92);
     expect(isStations(stations)).toBe(true);
   });
   it("rejects empty lists, duplicate IDs, invalid URLs and missing fields", () => {

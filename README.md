@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="docs/assets/banner.png" alt="lofeur — tune in. slow down." width="100%" />
+  <img src="docs/assets/banner.webp" alt="lofeur — tune in. slow down." width="100%" />
 </p>
 
 <p align="center">
-  <img src="public/logo.svg" alt="lofeur logo" width="64" />
+  <img src="public/logo.svg" alt="lofeur logo" width="180" />
 </p>
 
 <h1 align="center">Your little corner of calm.</h1>
@@ -36,19 +36,19 @@ Inspired by [Lofi Desk](https://desk.lofigirl.com/), rebuilt around listening an
 concentration. The familiar study scene and translucent controls, without account
 gates, live chat, shopping widgets, announcements, notes or to-do lists.
 
-| Tune in                                                          | Set the mood                                           | Find your rhythm                                          |
-| ---------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------- |
-| **18 public Lofi Girl stations**, available from the first visit | **12 original soundscapes**, mixed independently       | **Classic & long Pomodoro** with short and long breaks    |
-| Add, edit and remove your own YouTube links                      | Rain, beach, forest, fireplace, café, purring and more | Eight phases, pause, reset and adjustable alarm volume    |
-| Favorites, search, previous / next and volume controls           | Favorites, individual levels and a master volume       | Day / night theme, fullscreen and a hidden-interface view |
+| Tune in                                                | Set the mood                                           | Find your rhythm                                          |
+| ------------------------------------------------------ | ------------------------------------------------------ | --------------------------------------------------------- |
+| **18 live radios + 74 official mixes**                 | **12 original soundscapes**, mixed independently       | **Classic & long Pomodoro** with short and long breaks    |
+| Add, edit and remove your own YouTube links            | Rain, beach, forest, fireplace, café, purring and more | Eight phases, pause, reset and adjustable alarm volume    |
+| Favorites, search, previous / next and volume controls | Favorites, individual levels and a master volume       | Day / night theme, fullscreen and a hidden-interface view |
 
-All preferences live in your browser. No API key, account, backend or analytics
-service is required. The interface is in French.
+All preferences live in your browser. No API key, account or analytics service is required. Choose **French, English,
+Spanish, Mandarin Chinese or Hindi** from the language selector.
 
 ## A little look inside
 
 <p align="center">
-  <img src="docs/assets/preview-desktop.png" alt="Actual lofeur desktop: radio stations and Pomodoro over the night study scene" width="100%" />
+  <img src="docs/assets/preview-desktop.png" alt="Actual lofeur desktop: procedural fireplace, radio controls and Pomodoro" width="100%" />
 </p>
 
 <details>
@@ -76,8 +76,8 @@ npm ci
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173** and press **Entrer dans ma bulle**. YouTube loads
-only after this action. Ambient sounds can be used independently.
+Open **http://127.0.0.1:5173** and press **Entrer dans ma bulle**. The default lightweight mode streams audio directly from Lofi Girl. Use the
+camera button to enable YouTube video. Ambient sounds work independently.
 
 ```bash
 npm test           # URL validation, station imports and timer recovery
@@ -85,9 +85,61 @@ npm run build      # TypeScript checks + production build
 npm run preview    # Serve the production build locally
 ```
 
-To self-host, serve the generated `dist/` directory at the root of any static
-HTTPS host. There is no server to configure. Music and artwork require an internet
-connection; this is not an offline music player.
+For a production server with automatic station checks:
+
+```bash
+npm run build
+npm start
+# http://127.0.0.1:4173
+```
+
+The small Node server serves the app and caches public availability checks for
+20 minutes. Set `PORT` and `HOST` as needed behind your HTTPS reverse proxy.
+A static host can serve `dist/` too; it uses the last audited health snapshot
+and playback-error detection, without the server's background refresh.
+
+## A lighter tab
+
+- **Video off really unloads YouTube**, including its iframe and decoder. The 18
+  radios use official public audio streams instead of a hidden video player.
+- The procedural backdrop offers **aurora, flowing gradient, pixels and a
+  fireplace**, with colors, grain, texture, intensity, speed and energy-saving
+  controls. Animation pauses when the tab is hidden or reduced motion is enabled.
+- Economy mode caps the main canvas's longest side at **480 pixels and 12 fps**;
+  normal mode uses 720 pixels and 20 fps. No WebGL or full-resolution DPR buffers.
+- Stopped sounds release their media sources and buffers. Station artwork loads
+  lazily, and the list renders **24 rows at a time**.
+- The Pomodoro ticks once per second. Metadata polling pauses in hidden tabs and
+  avoids overlapping requests or redundant updates.
+
+Recorded YouTube mixes need video playback unless you provide a separate direct
+audio URL. lofeur does not extract audio from YouTube. The app explains this and
+offers an enable-video action when needed.
+
+## Stations that recover gracefully
+
+Available live radios appear first, recordings next, and unavailable sources last.
+A red dot identifies live content. Unavailable sources are grey and cannot be
+started, while their edit controls remain available. Favorites reorder items
+**within** these groups. Availability is specific to the chosen audio/video mode.
+
+Playback failures update the list immediately. Temporary errors expire and can
+be rechecked; bot challenges or failed verification requests are not treated as
+proof that a station is unavailable. Use the refresh button to request a new check.
+
+<p align="center"><img src="docs/assets/preview-catalog.png" alt="A live Halloween radio followed by recorded Halloween mixes" width="100%" /></p>
+
+The scheduled [catalog workflow](.github/workflows/catalog.yml) runs every six
+hours. It verifies the exact official [compilations playlist](https://www.youtube.com/playlist?list=PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4),
+adds new recordings, checks playability, and repairs a broken default live URL
+only when a unique matching live is found on the verified Lofi Girl channel.
+It runs tests and builds before saving the updated catalog. User-edited sources
+are preserved. External outages and regional restrictions can still occur.
+
+```bash
+npm run check:stations        # Refresh the health snapshot
+node scripts/refresh-catalog.mjs  # Also sync and repair; requires yt-dlp
+```
 
 ## Your stations, your rules
 
@@ -100,8 +152,8 @@ Supported links include `youtube.com/watch?v=…`, `youtube.com/live/…`,
 
 **Exporter / Importer** transfers your station list as JSON. Import replaces the
 current list; export a backup first if you want to keep it. Imports are validated,
-limited to 100 entries and reject duplicate IDs. Use the reset button to restore
-the original catalog.
+limited to 250 entries and reject duplicate IDs. Use the reset button to restore
+the original catalog, including the playlist.
 
 ```json
 [
@@ -140,12 +192,15 @@ src/
   App.tsx          Player, mixer, station editor and focus tools
   lib.ts           URL parsing, storage, audio catalog and timer math
   lib.test.ts      Behavioral tests
+  station-health.ts Availability, grouping and catalog migrations
+  ProceduralScene.tsx Bounded Canvas backdrop
+  i18n.tsx         Five-language interface
   youtube.ts       Typed YouTube IFrame API loader
   now-playing.ts   Public live track metadata with backup
   stations.json    Public default station catalog
   style.css        Reference-inspired desktop and mobile styles
 public/
-  logo.svg         Original lofeur mark
+  logo.svg         Fredoka wordmark, exported as vector paths
   fonts/           Reference typefaces; see third-party notice
 docs/
   assets/          Banner and real browser previews
@@ -170,7 +225,9 @@ application code is [MIT licensed](LICENSE). Third-party media and fonts are
 public redistribution; the repository is private while those rights are reviewed.
 
 The [reference notes](docs/reverse-engineering.md) describe what was observed and
-the reconstruction's limits. The README banner is an original generated
-illustration; application previews are real browser screenshots.
+the reconstruction's limits. The banner illustration is generated; its **lettering is real Fredoka typography**,
+matching the SVG interface logo. The font, OFL license and rebuild scripts are
+included in [`docs/branding/`](docs/branding/) and [`scripts/`](scripts/).
+Application previews are real browser screenshots.
 
 <p align="center"><sub>Put something good on. Take your time.</sub></p>

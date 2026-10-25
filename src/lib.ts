@@ -1,10 +1,31 @@
+import defaults from "./catalog";
 export type Station = {
   id: string;
   name: string;
   url: string;
   description: string;
   cover: string;
+  audioUrl?: string;
+  kind?: "live" | "video";
+  duration?: number;
+  playlist?: string;
 };
+export function validAudioUrl(url: string): boolean {
+  try {
+    const u = new URL(url);
+    return u.protocol === "https:" && !u.username && !u.password;
+  } catch {
+    return false;
+  }
+}
+export function audioSource(station: Station): string | null {
+  if (station.audioUrl && validAudioUrl(station.audioUrl))
+    return station.audioUrl;
+  const original = defaults.find(
+    (s) => s.id === station.id && s.url === station.url,
+  );
+  return original?.audioUrl || null;
+}
 export function youtubeId(input: string): string | null {
   if (/^[\w-]{11}$/.test(input.trim())) return input.trim();
   try {
@@ -51,7 +72,7 @@ export function save(key: string, value: unknown) {
 export const isStations = (value: unknown): value is Station[] =>
   Array.isArray(value) &&
   value.length > 0 &&
-  value.length <= 100 &&
+  value.length <= 250 &&
   new Set(value.map((s) => s?.id)).size === value.length &&
   value.every(
     (s) =>
@@ -62,7 +83,15 @@ export const isStations = (value: unknown): value is Station[] =>
       typeof s.url === "string" &&
       youtubeId(s.url) &&
       typeof s.description === "string" &&
-      typeof s.cover === "string",
+      typeof s.cover === "string" &&
+      (s.kind === undefined || s.kind === "live" || s.kind === "video") &&
+      (s.duration === undefined ||
+        (typeof s.duration === "number" &&
+          Number.isFinite(s.duration) &&
+          s.duration >= 0)) &&
+      (s.audioUrl === undefined ||
+        s.audioUrl === "" ||
+        (typeof s.audioUrl === "string" && validAudioUrl(s.audioUrl))),
   );
 export const duration = (phase: number, deep: boolean) =>
   (phase % 2 === 1

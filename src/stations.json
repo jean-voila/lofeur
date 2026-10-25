@@ -4,125 +4,901 @@
     "name": "Lofi hip hop",
     "url": "https://www.youtube.com/watch?v=rFZHOHl-L8A",
     "description": "beats to relax/study to 📚",
-    "cover": "https://cdn.lofigirl.com/3-1.webp"
+    "cover": "https://cdn.lofigirl.com/3-1.webp",
+    "audioUrl": "https://radio.lofigirl.com/listen/lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "synthwave",
     "name": "Synthwave",
     "url": "https://www.youtube.com/watch?v=4xDzrJKXOOY",
     "description": "beats to chill/game to 🌌",
-    "cover": "https://cdn.lofigirl.com/synthwave_cover.webp"
+    "cover": "https://cdn.lofigirl.com/synthwave_cover.webp",
+    "audioUrl": "https://radio.lofigirl.com/listen/synthwave/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "halloween-lofi",
     "name": "Halloween lofi",
-    "url": "https://www.youtube.com/watch?v=1-LpQekNa9g",
+    "url": "https://www.youtube.com/watch?v=0sfDth4lMLc",
     "description": "spooky beats to get chills to 🧟‍♀️",
-    "cover": "https://cdn.lofigirl.com/halloween_lofi.png"
+    "cover": "https://cdn.lofigirl.com/halloween_lofi.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/halloween-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "lofi-sleep",
     "name": "sleep lofi",
     "url": "https://www.youtube.com/watch?v=VAlMDl00mYY",
     "description": "relaxing music to sleep/dream to 🌌",
-    "cover": "https://cdn.lofigirl.com/lofi_sleep_2.jpg"
+    "cover": "https://cdn.lofigirl.com/lofi_sleep_2.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/lofi-sleep/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "jazz-lofi",
     "name": "Jazz lofi",
     "url": "https://www.youtube.com/watch?v=E2vONfzoyRI",
     "description": "beats to chill/study to 🎷",
-    "cover": "https://cdn.lofigirl.com/jazz_lofi_cover.webp"
+    "cover": "https://cdn.lofigirl.com/jazz_lofi_cover.webp",
+    "audioUrl": "https://radio.lofigirl.com/listen/jazz-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "lofi-girl",
     "name": "Asian lofi",
     "url": "https://www.youtube.com/watch?v=1Tl2FtV06qo",
     "description": "beats to relax/study to ⛩️",
-    "cover": "https://cdn.lofigirl.com/asian_lofi.jpg"
+    "cover": "https://cdn.lofigirl.com/asian_lofi.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/asian-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "dark-ambient",
     "name": "dark ambient",
     "url": "https://www.youtube.com/watch?v=S_MOd40zlYU",
     "description": "music to escape/dream to 🌃",
-    "cover": "https://cdn.lofigirl.com/dark_amb.png"
+    "cover": "https://cdn.lofigirl.com/dark_amb.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/dark-ambient/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "sleep-ambient",
     "name": "deep sleep music",
     "url": "https://www.youtube.com/watch?v=nI725iVsyoQ",
     "description": "calm to sleep & dream to 🌌",
-    "cover": "https://cdn.lofigirl.com/spotify_playlist_cover_73.webp"
+    "cover": "https://cdn.lofigirl.com/spotify_playlist_cover_73.webp",
+    "audioUrl": "https://radio.lofigirl.com/listen/sleep-ambient/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "peaceful-piano",
     "name": "relaxing piano",
     "url": "https://www.youtube.com/watch?v=N0snMcR6aaA",
     "description": "calm music to focus to 🎹",
-    "cover": "https://cdn.lofigirl.com/calm_piano.png"
+    "cover": "https://cdn.lofigirl.com/calm_piano.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/peaceful-piano/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "medieval",
     "name": "medieval lofi",
     "url": "https://www.youtube.com/watch?v=IxPANmjPaek",
     "description": "beats to scribe manuscripts to 🏰",
-    "cover": "https://cdn.lofigirl.com/medieval_lofi.jpg"
+    "cover": "https://cdn.lofigirl.com/medieval_lofi.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/medieval/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "summer-restful-holidays",
     "name": "summer lofi",
     "url": "https://www.youtube.com/watch?v=0muHFBSiybw",
     "description": "music to put you in a better mood ☀️",
-    "cover": "https://cdn.lofigirl.com/artwork-440x440.jpg"
+    "cover": "https://cdn.lofigirl.com/artwork-440x440.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/summer-restful-holidays/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "relaxing-jazz",
     "name": "relaxing jazz",
     "url": "https://www.youtube.com/watch?v=A8jDx9TLMQc",
     "description": "to study/chill to🌹",
-    "cover": "https://cdn.lofigirl.com/jazz-2.png"
+    "cover": "https://cdn.lofigirl.com/jazz-2.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/relaxing-jazz/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "classical-lofi",
     "name": "classical music",
     "url": "https://www.youtube.com/watch?v=jXAEIWcGXwE",
     "description": "relaxing songs to read/study to 🎻",
-    "cover": "https://cdn.lofigirl.com/classical_radio.png"
+    "cover": "https://cdn.lofigirl.com/classical_radio.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/classical-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "synth-ambient",
     "name": "synth ambient",
     "url": "https://www.youtube.com/watch?v=GSfT7H87zq4",
     "description": "deep space music to sleep to 🌌",
-    "cover": "https://cdn.lofigirl.com/synth_ambient.jpg"
+    "cover": "https://cdn.lofigirl.com/synth_ambient.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/synth-ambient/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "chill-guitar",
     "name": "chill guitar",
     "url": "https://www.youtube.com/watch?v=E_XmwjgRLz8",
     "description": "music to study/relax to 🎸",
-    "cover": "https://cdn.lofigirl.com/chill_guitar.png"
+    "cover": "https://cdn.lofigirl.com/chill_guitar.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/chill-guitar/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "bossa-lofi",
     "name": "bossa lofi",
     "url": "https://www.youtube.com/watch?v=56llPN9tS88",
     "description": "chill music for relaxing days 🌴",
-    "cover": "https://cdn.lofigirl.com/bossa_lofi.jpg"
+    "cover": "https://cdn.lofigirl.com/bossa_lofi.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/bossa-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "sad-lofi",
     "name": "sad lofi",
     "url": "https://www.youtube.com/watch?v=CwPCy1GLS38",
     "description": "beats for rainy days ☔",
-    "cover": "https://cdn.lofigirl.com/sad_lofi.jpg"
+    "cover": "https://cdn.lofigirl.com/sad_lofi.jpg",
+    "audioUrl": "https://radio.lofigirl.com/listen/sad-lofi/radio.mp3",
+    "kind": "live"
   },
   {
     "id": "christmas-lofi",
     "name": "christmas lofi",
     "url": "https://www.youtube.com/watch?v=XSXEaikz0Bc",
     "description": "to get festive to 🎄",
-    "cover": "https://cdn.lofigirl.com/noel_cover-1.png"
+    "cover": "https://cdn.lofigirl.com/noel_cover-1.png",
+    "audioUrl": "https://radio.lofigirl.com/listen/christmas-lofi/radio.mp3",
+    "kind": "live"
+  },
+  {
+    "id": "mix-vadHXNBy4jQ",
+    "name": "8h of halloween lofi 🎃 spooky ambience to get chills to",
+    "url": "https://www.youtube.com/watch?v=vadHXNBy4jQ",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/vadHXNBy4jQ/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-_jH2oTNRe7g",
+    "name": "cozy autumn music 🍂 lofi beats to study / relax to",
+    "url": "https://www.youtube.com/watch?v=_jH2oTNRe7g",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/_jH2oTNRe7g/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3882,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-O_97HkFMhFk",
+    "name": "lofi house vol.1 🌆 chill music to vibe to",
+    "url": "https://www.youtube.com/watch?v=O_97HkFMhFk",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/O_97HkFMhFk/mqdefault.jpg",
+    "kind": "video",
+    "duration": 5456,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-P12XxVMbYXg",
+    "name": "Lofi Girl x Secret Lair - beats to cast to 💫",
+    "url": "https://www.youtube.com/watch?v=P12XxVMbYXg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/P12XxVMbYXg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3875,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-yUXwdnOJ_z0",
+    "name": "sleep under the stars 🌌 8 hours of calming ambient music",
+    "url": "https://www.youtube.com/watch?v=yUXwdnOJ_z0",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/yUXwdnOJ_z0/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-XVFUtEh9zrY",
+    "name": "summer lofi ☀️ chill beats to relax to",
+    "url": "https://www.youtube.com/watch?v=XVFUtEh9zrY",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/XVFUtEh9zrY/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3661,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-2oJqY4nhL-c",
+    "name": "15 min power nap ⚡ lofi sleep to recharge + alarm",
+    "url": "https://www.youtube.com/watch?v=2oJqY4nhL-c",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/2oJqY4nhL-c/mqdefault.jpg",
+    "kind": "video",
+    "duration": 905,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-fhL67fnDXcU",
+    "name": "coding music 💻 synthwave beats to program to",
+    "url": "https://www.youtube.com/watch?v=fhL67fnDXcU",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/fhL67fnDXcU/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-JCKBaJDRMw4",
+    "name": "chill music for work 💼 lofi beats to stay productive",
+    "url": "https://www.youtube.com/watch?v=JCKBaJDRMw4",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/JCKBaJDRMw4/mqdefault.jpg",
+    "kind": "video",
+    "duration": 36000,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-3G3vzexbf64",
+    "name": "peaceful piano 🎹 3 hours of relaxing music to read to",
+    "url": "https://www.youtube.com/watch?v=3G3vzexbf64",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/3G3vzexbf64/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-fsPRybb-xXg",
+    "name": "cozy spring lofi 🌸 chill music to study & relax to",
+    "url": "https://www.youtube.com/watch?v=fsPRybb-xXg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/fsPRybb-xXg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3868,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-n2w3VdXRJjw",
+    "name": "Lofi Girl x The Sims - cozy music to feel ooh be gah!",
+    "url": "https://www.youtube.com/watch?v=n2w3VdXRJjw",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/n2w3VdXRJjw/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3991,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-eTP5PZ8NoeU",
+    "name": "Sweet Dreams Lofi 💤  8 hours of relaxing beats to sleep to",
+    "url": "https://www.youtube.com/watch?v=eTP5PZ8NoeU",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/eTP5PZ8NoeU/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-W5FI97ovWog",
+    "name": "pov: you procrastinated and have an essay due tomorrow ✍️ lofi focus music to beat that assignment",
+    "url": "https://www.youtube.com/watch?v=W5FI97ovWog",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/W5FI97ovWog/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-NH8uI4EJ0bo",
+    "name": "romantic lofi mix 💖 3 hours of background music for valentine’s day",
+    "url": "https://www.youtube.com/watch?v=NH8uI4EJ0bo",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/NH8uI4EJ0bo/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-Fxqv9xdLMG4",
+    "name": "Journey Through Time 🏮 Ancient China [lofi beats to celebrate Chinese New Year]",
+    "url": "https://www.youtube.com/watch?v=Fxqv9xdLMG4",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/Fxqv9xdLMG4/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3640,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-fQ35eh6k0RI",
+    "name": "deep sleep music with purring sounds 💤 8 hours of ambient mix",
+    "url": "https://www.youtube.com/watch?v=fQ35eh6k0RI",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/fQ35eh6k0RI/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-cyzx45mupcQ",
+    "name": "4 A.M Chill Session 🌌 synthwave music for long gaming nights",
+    "url": "https://www.youtube.com/watch?v=cyzx45mupcQ",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/cyzx45mupcQ/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3699,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-53gNFOqDFcE",
+    "name": "study with me [pomodoro] 📚 3 hours of lofi focus music",
+    "url": "https://www.youtube.com/watch?v=53gNFOqDFcE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/53gNFOqDFcE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10804,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-CBSlu_VMS9U",
+    "name": "jazz lofi mix [3 hours] 🎷 relaxing music to chill/study to",
+    "url": "https://www.youtube.com/watch?v=CBSlu_VMS9U",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/CBSlu_VMS9U/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10865,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-S-4hwfyK-XQ",
+    "name": "winter lofi mix [3 hours] ❄️ relaxing music to chill/study to",
+    "url": "https://www.youtube.com/watch?v=S-4hwfyK-XQ",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/S-4hwfyK-XQ/mqdefault.jpg",
+    "kind": "video",
+    "duration": 11065,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-7ccH8u8fj8Y",
+    "name": "Best of lofi hip hop 2025 🏙️ - beats to relax/study to",
+    "url": "https://www.youtube.com/watch?v=7ccH8u8fj8Y",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/7ccH8u8fj8Y/mqdefault.jpg",
+    "kind": "video",
+    "duration": 8230,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-7O9jGGm7PlE",
+    "name": "Lofi Girl - Christmas 2025 🎄",
+    "url": "https://www.youtube.com/watch?v=7O9jGGm7PlE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/7O9jGGm7PlE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3600,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-Z_8f5IWuTFg",
+    "name": "5 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=Z_8f5IWuTFg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/Z_8f5IWuTFg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4350,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-qwdzIECTqn8",
+    "name": "Christmas Lofi 🎄 8 hours of cozy music for the holiday season",
+    "url": "https://www.youtube.com/watch?v=qwdzIECTqn8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/qwdzIECTqn8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28905,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-8gJ716dhStg",
+    "name": "A Book, a Blanket, and the Autumn Breeze 🍂 lofi hip hop [No AI]",
+    "url": "https://www.youtube.com/watch?v=8gJ716dhStg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/8gJ716dhStg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10830,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-FEKpdb4Kkp4",
+    "name": "Lofi Girl - Halloween 2025 🧟‍♀️",
+    "url": "https://www.youtube.com/watch?v=FEKpdb4Kkp4",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/FEKpdb4Kkp4/mqdefault.jpg",
+    "kind": "video",
+    "duration": 2622,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-UJs6__K7gSY",
+    "name": "Bedtime Lofi 💤  8 hours of relaxing beats to sleep to",
+    "url": "https://www.youtube.com/watch?v=UJs6__K7gSY",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/UJs6__K7gSY/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28828,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-qEN5ZHDi1Kg",
+    "name": "back to school 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=qEN5ZHDi1Kg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/qEN5ZHDi1Kg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3595,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-8b3fqIBrNW0",
+    "name": "lofi hip hop mix 📚 beats to relax/study to (Part 2)",
+    "url": "https://www.youtube.com/watch?v=8b3fqIBrNW0",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/8b3fqIBrNW0/mqdefault.jpg",
+    "kind": "video",
+    "duration": 14702,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-M8J9zHyyUYc",
+    "name": "lofi beats to do absolutely nothing to",
+    "url": "https://www.youtube.com/watch?v=M8J9zHyyUYc",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/M8J9zHyyUYc/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3665,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-deRDilpdOnE",
+    "name": "Summer in Rio 🏖️ [bossa/summer lofi]",
+    "url": "https://www.youtube.com/watch?v=deRDilpdOnE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/deRDilpdOnE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3886,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-rwLv6YPiGsE",
+    "name": "Lofi Girl x Assassin's Creed Shadows - Stealthy beats to relax to 🌸",
+    "url": "https://www.youtube.com/watch?v=rwLv6YPiGsE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/rwLv6YPiGsE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 2858,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-aWV6uv8Que0",
+    "name": "it's 2017 and you're listening to lofi hip hop for the first time",
+    "url": "https://www.youtube.com/watch?v=aWV6uv8Que0",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/aWV6uv8Que0/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3282,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-ohyiTPgAxgY",
+    "name": "Parisian Romance ❤️ [french lofi]",
+    "url": "https://www.youtube.com/watch?v=ohyiTPgAxgY",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/ohyiTPgAxgY/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3678,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-xsDnEj2Hx4Q",
+    "name": "Blue Monday ☔ [sad lofi]",
+    "url": "https://www.youtube.com/watch?v=xsDnEj2Hx4Q",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/xsDnEj2Hx4Q/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3857,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-lA9FONoiuFA",
+    "name": "Best of lofi 2024 🎆 beats to chill/study to",
+    "url": "https://www.youtube.com/watch?v=lA9FONoiuFA",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/lA9FONoiuFA/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10778,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-R_K7UqHplyA",
+    "name": "Best of synthwave 2024 🎉 beats to chill/game to",
+    "url": "https://www.youtube.com/watch?v=R_K7UqHplyA",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/R_K7UqHplyA/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3602,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-wgwcBTrY9og",
+    "name": "Lofi Girl - Christmas 2024 🎄",
+    "url": "https://www.youtube.com/watch?v=wgwcBTrY9og",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/wgwcBTrY9og/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3945,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-VXY2P8vKgV4",
+    "name": "Lofi Girl x Chess.com - Synthwave beats to play chess to ♟️",
+    "url": "https://www.youtube.com/watch?v=VXY2P8vKgV4",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/VXY2P8vKgV4/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4909,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-VDtjKuS2R3E",
+    "name": "1 P.M Study Session 🎹 [calm piano]",
+    "url": "https://www.youtube.com/watch?v=VDtjKuS2R3E",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/VDtjKuS2R3E/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3903,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-D6TSIHxNzfU",
+    "name": "Lofi Girl - Halloween 2024 🎃",
+    "url": "https://www.youtube.com/watch?v=D6TSIHxNzfU",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/D6TSIHxNzfU/mqdefault.jpg",
+    "kind": "video",
+    "duration": 5159,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-CFGLoQIhmow",
+    "name": "lofi hip hop mix 📚 beats to relax/study to (Part 1)",
+    "url": "https://www.youtube.com/watch?v=CFGLoQIhmow",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/CFGLoQIhmow/mqdefault.jpg",
+    "kind": "video",
+    "duration": 10241,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-MadEqVeRFuM",
+    "name": "Music to put you in a better mood 🍹[brazilian lofi]",
+    "url": "https://www.youtube.com/watch?v=MadEqVeRFuM",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/MadEqVeRFuM/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3709,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-WBnjO3zEwCM",
+    "name": "Journey Through Time 🏰 [medieval lofi]",
+    "url": "https://www.youtube.com/watch?v=WBnjO3zEwCM",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/WBnjO3zEwCM/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3659,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-8Wpy_DOeaP8",
+    "name": "Childhood Memories 🎸 [chill guitar]",
+    "url": "https://www.youtube.com/watch?v=8Wpy_DOeaP8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/8Wpy_DOeaP8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3734,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-9zb_6EgG0F8",
+    "name": "Saturday Chillin' ☀️ [summer lofi]",
+    "url": "https://www.youtube.com/watch?v=9zb_6EgG0F8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/9zb_6EgG0F8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3610,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-w4TNGhSj2tc",
+    "name": "3 A.M Chill Session 🌌 [synthwave]",
+    "url": "https://www.youtube.com/watch?v=w4TNGhSj2tc",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/w4TNGhSj2tc/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4528,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-cYPJaHT5f3E",
+    "name": "Peaceful Day 🎹 [calm piano]",
+    "url": "https://www.youtube.com/watch?v=cYPJaHT5f3E",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/cYPJaHT5f3E/mqdefault.jpg",
+    "kind": "video",
+    "duration": 5310,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-CMNyHBx1gak",
+    "name": "Lonely Night 🌑 [dark ambient]",
+    "url": "https://www.youtube.com/watch?v=CMNyHBx1gak",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/CMNyHBx1gak/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4239,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-mmKguZohAck",
+    "name": "Best of lofi hip hop 2023 🎉 - beats to relax/study to",
+    "url": "https://www.youtube.com/watch?v=mmKguZohAck",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/mmKguZohAck/mqdefault.jpg",
+    "kind": "video",
+    "duration": 8680,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-1YBtzAAChU8",
+    "name": "Lofi Girl - Christmas 2023 🎄",
+    "url": "https://www.youtube.com/watch?v=1YBtzAAChU8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/1YBtzAAChU8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3939,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-EeRfSNx5RhE",
+    "name": "Lofi Girl x Chess.com ♟ [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=EeRfSNx5RhE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/EeRfSNx5RhE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3463,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-0MiR7bC9B5o",
+    "name": "Lofi Girl - Halloween 2023 🎃",
+    "url": "https://www.youtube.com/watch?v=0MiR7bC9B5o",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/0MiR7bC9B5o/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4408,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-g6LhK0wTemE",
+    "name": "Lofi Girl x LEGO – chill beats for LEGO building 🧱",
+    "url": "https://www.youtube.com/watch?v=g6LhK0wTemE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/g6LhK0wTemE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 5166,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-Z-_TTyZUOLk",
+    "name": "2 A.M Chill Session 🌌 [synthwave]",
+    "url": "https://www.youtube.com/watch?v=Z-_TTyZUOLk",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/Z-_TTyZUOLk/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3748,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-1bvbsx-hpFc",
+    "name": "Restful Holidays ☀️ [summer lofi]",
+    "url": "https://www.youtube.com/watch?v=1bvbsx-hpFc",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/1bvbsx-hpFc/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3681,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-ldDtjQkLsss",
+    "name": "Blissful Dreams 💤 [sleep lofi]",
+    "url": "https://www.youtube.com/watch?v=ldDtjQkLsss",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/ldDtjQkLsss/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3556,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-TlWYgGyNnJo",
+    "name": "1 A.M Chill Session 🌌 [synthwave]",
+    "url": "https://www.youtube.com/watch?v=TlWYgGyNnJo",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/TlWYgGyNnJo/mqdefault.jpg",
+    "kind": "video",
+    "duration": 8952,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-i43tkaTXtwI",
+    "name": "Best of lofi hip hop 2022 🎆 - beats to relax/study to",
+    "url": "https://www.youtube.com/watch?v=i43tkaTXtwI",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/i43tkaTXtwI/mqdefault.jpg",
+    "kind": "video",
+    "duration": 11474,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-O7RG-B6N1Vw",
+    "name": "Lonely Days ☔ [sad lofi]",
+    "url": "https://www.youtube.com/watch?v=O7RG-B6N1Vw",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/O7RG-B6N1Vw/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3528,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix--R0UYHS8A_A",
+    "name": "Afternoon Jazz 🎷 [jazz lofi]",
+    "url": "https://www.youtube.com/watch?v=-R0UYHS8A_A",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/-R0UYHS8A_A/mqdefault.jpg",
+    "kind": "video",
+    "duration": 1763,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-Nyx6SBixRE8",
+    "name": "Sleepless Night 🌙 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=Nyx6SBixRE8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/Nyx6SBixRE8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3431,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-1fueZCTYkpA",
+    "name": "Morning Coffee ☕️ [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=1fueZCTYkpA",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/1fueZCTYkpA/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3868,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-l98w9OSKVNA",
+    "name": "12 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=l98w9OSKVNA",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/l98w9OSKVNA/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3449,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-n61ULEU7CO0",
+    "name": "Best of lofi hip hop 2021 ✨ [beats to relax/study to]",
+    "url": "https://www.youtube.com/watch?v=n61ULEU7CO0",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/n61ULEU7CO0/mqdefault.jpg",
+    "kind": "video",
+    "duration": 22258,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-gnZImHvA0ME",
+    "name": "Soothing Breeze 🍃 [asian lofi]",
+    "url": "https://www.youtube.com/watch?v=gnZImHvA0ME",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/gnZImHvA0ME/mqdefault.jpg",
+    "kind": "video",
+    "duration": 2965,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-TURbeWK2wwg",
+    "name": "4 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=TURbeWK2wwg",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/TURbeWK2wwg/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3705,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-_tV5LEBDs7w",
+    "name": "Cozy Winter ❄️ [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=_tV5LEBDs7w",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/_tV5LEBDs7w/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4681,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-BTYAsjAVa3I",
+    "name": "3 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=BTYAsjAVa3I",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/BTYAsjAVa3I/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3604,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-zFhfksjf_mY",
+    "name": "Lazy Sunday 💤 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=zFhfksjf_mY",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/zFhfksjf_mY/mqdefault.jpg",
+    "kind": "video",
+    "duration": 4415,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-wAPCSnAhhC8",
+    "name": "2 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=wAPCSnAhhC8",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/wAPCSnAhhC8/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3739,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-lTRiuFIWV54",
+    "name": "1 A.M Study Session 📚 [lofi hip hop]",
+    "url": "https://www.youtube.com/watch?v=lTRiuFIWV54",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/lTRiuFIWV54/mqdefault.jpg",
+    "kind": "video",
+    "duration": 3674,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix--FlxM_0S2lA",
+    "name": "Best of lofi 2018 🎶 beats to chill/study to",
+    "url": "https://www.youtube.com/watch?v=-FlxM_0S2lA",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/-FlxM_0S2lA/mqdefault.jpg",
+    "kind": "video",
+    "duration": 6817,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
   }
 ]

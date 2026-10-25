@@ -1,0 +1,33 @@
+# Browser resource budget
+
+The default is native audio plus a procedural background. YouTube is not loaded
+until the user enables video and starts playback. Switching back destroys the
+iframe and releases the media source; CSS hiding is not used as a substitute.
+
+The main RGBA canvas is capped at 480 pixels on its longest edge in economy
+mode (12 fps), and 720 in normal mode (20 fps). Even on a square viewport its
+main pixel buffer represents at most 921,600 bytes in economy mode. This is a
+buffer-size bound, **not** a claim about the browser's total resident memory;
+compositing, media buffering, font/image decoding and the browser add overhead.
+The fireplace uses a fixed small noise field and image buffer, reused each frame.
+There are no particle-object lists, per-frame ImageData allocations or WebGL.
+
+Animations cancel their frame callback when hidden or when reduced motion is
+requested. Speed zero renders a still frame. Resize and visibility listeners are
+removed on teardown. Canvas is memoized independently of the timer's updates.
+Inactive soundscape elements clear their `src`, call `load()`, and leave the map.
+Only 24 station rows render initially, with more available on request. Artwork
+uses lazy decoding/loading. The full playlist does not preload 74 players.
+
+Public availability checks run on the Node server or scheduled catalog worker,
+not inside hidden browser players. The server uses two metadata requests at a
+time, caps HTML reads at 3 MB, caches results for 20 minutes, and releases audio
+probe bodies immediately. It neither extracts music nor forwards streaming data.
+A static deployment reads the last health snapshot instead.
+
+Verification includes media lifecycle tests (including iframe destruction and
+source release), canvas allocation bounds, hidden-tab code paths, translation
+coverage, sorting, migrations and playability parsing. A fresh isolated Chromium
+capture (`ev_f73679928fe7ea8fc4b759dad09221c739cbfe8dfe66f3231475c9f3d7eab484`)
+reported **zero YouTube/googlevideo requests** in audio-only mode and no page
+errors. This capture covers initial load, not a long-duration RAM benchmark.

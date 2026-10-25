@@ -68,3 +68,11 @@ alarms still depend on the browser allowing audio playback.
 for all 12 ambient WAV files and both alarm MP3s. Desktop and 390 × 844 mobile
 layouts were inspected. Playback, live song metadata, a station add/delete cycle,
 ambient playback and Pomodoro start/reset were verified in a real browser.
+
+## Subsequent implementation
+
+The current version adds five languages, a real Fredoka vector wordmark,
+audio-only mode with procedural backgrounds, and 74 official recorded mixes.
+See `catalog.md` for availability and repair behavior and `performance.md` for
+the resource budget and its measurement limits. The initial 18-station table
+above documents the original reconstruction, not the full current catalog.

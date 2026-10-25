@@ -33,8 +33,12 @@ import {
   ChevronDown,
   Coffee,
   Info,
+  Video,
+  VideoOff,
+  Palette,
+  Languages,
 } from "lucide-react";
-import defaults from "./stations.json";
+import defaults from "./catalog";
 import { useNowPlaying } from "./now-playing";
 import {
   advanceTimer,
@@ -46,10 +50,24 @@ import {
   save,
   sounds,
   youtubeId,
+  validAudioUrl,
+  audioSource,
   type Station,
 } from "./lib";
-import { youtube, type Player } from "./youtube";
-
+import { useRadio } from "./use-radio";
+import {
+  migrateCatalog,
+  sortStations,
+  stationState,
+  useStationHealth,
+} from "./station-health";
+import { useI18n, locales } from "./i18n";
+import ProceduralScene, {
+  initialScene,
+  validScene,
+  type SceneOptions,
+} from "./ProceduralScene";
+import SceneSettings from "./SceneSettings";
 type TimerState = {
   phase: number;
   remaining: number;
@@ -122,15 +140,28 @@ function Cover({ station }: { station: Station }) {
         `https://i.ytimg.com/vi/${youtubeId(station.url)}/hqdefault.jpg`
       }
       alt=""
+      loading="lazy"
+      decoding="async"
       onError={(e) => {
         e.currentTarget.onerror = null;
-        e.currentTarget.src = "/logo.svg";
+        e.currentTarget.src = "/favicon.svg";
       }}
     />
   );
 }
-
 export default function App() {
+  const { t, locale, setLocale } = useI18n();
+  const [video, setVideo] = useSaved(
+    "video-enabled",
+    false,
+    (x) => typeof x === "boolean",
+  );
+  const [sceneOptions, setSceneOptions] = useSaved<SceneOptions>(
+    "scene",
+    initialScene,
+    validScene,
+  );
+  const [sceneSettings, setSceneSettings] = useState(false);
   const [stations, setStations] = useSaved<Station[]>(
     "stations",
     defaults,
@@ -141,6 +172,18 @@ export default function App() {
     defaults[0].id,
     (x) => typeof x === "string",
   );
+  const catalogHealth = useStationHealth();
+  const [visibleStations, setVisibleStations] = useState(24);
+  useEffect(() => {
+    const known = load<string[]>("catalog-known-ids", []);
+    const unseen = defaults.filter((s) => !known.includes(s.id));
+    setStations((current) => migrateCatalog(current, unseen));
+    save(
+      "catalog-known-ids",
+      defaults.map((s) => s.id),
+    );
+    save("catalog-version", 2);
+  }, [setStations]);
   const station = stations.find((s) => s.id === selected) || stations[0];
   const song = useNowPlaying(station);
   const [theme, setTheme] = useSaved<"dark" | "light">(
@@ -200,29 +243,30 @@ export default function App() {
   const [about, setAbout] = useState(false);
   const [zen, setZen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
-  const [playing, setPlaying] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [ready, setReady] = useState(false);
-  const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [query, setQuery] = useState("");
   const [favoritesOnly, setFavoritesOnly] = useState(false);
+  useEffect(() => setVisibleStations(24), [query, favoritesOnly]);
   const [edit, setEdit] = useState<Station | "new" | null>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
   const [soundActive, setSoundActive] = useState<string[]>([]);
-  const [title, setTitle] = useState("");
-  const [reloadPlayer, setReloadPlayer] = useState(0);
-  const player = useRef<Player | null>(null);
-  const playerHost = useRef<HTMLDivElement>(null);
+  const radio = useRadio(station, video, consent, volume, muted);
+  const { playing, loading, error, title, host: playerHost } = radio;
+  const currentStationState = stationState(
+    station,
+    video,
+    catalogHealth.health,
+    catalogHealth.failed(station, video),
+  );
+  useEffect(() => {
+    if (radio.unavailable) catalogHealth.mark(station, video, true);
+    else if (playing) catalogHealth.mark(station, video, false);
+  }, [radio.unavailable, playing, station.url, video, catalogHealth.mark]);
   const audios = useRef(new Map<string, HTMLAudioElement>());
-  const latest = useRef({ station, volume, muted });
-  latest.current = { station, volume, muted };
-  const wantsPlay = useRef(false);
   const importRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
   const lastFocus = useRef<HTMLElement | null>(null);
-
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
@@ -241,102 +285,6 @@ export default function App() {
       lastFocus.current?.focus();
     }
   }, [modalOpen]);
-
-  useEffect(() => {
-    if (!consent || !playerHost.current) return;
-    let cancelled = false;
-    let owned: Player | null = null;
-    let readyTimeout: ReturnType<typeof setTimeout> | undefined;
-    setLoading(true);
-    setError("");
-    setReady(false);
-    const element = document.createElement("div");
-    playerHost.current.replaceChildren(element);
-    youtube()
-      .then((YT) => {
-        if (cancelled) return;
-        readyTimeout = setTimeout(() => {
-          if (!cancelled) {
-            setLoading(false);
-            setError(
-              "Le lecteur ne répond pas. Réessayez ou ouvrez la station sur YouTube.",
-            );
-          }
-        }, 20000);
-        owned = new YT.Player(element, {
-          videoId: youtubeId(latest.current.station.url)!,
-          playerVars: {
-            origin: location.origin,
-            playsinline: 1,
-            controls: 0,
-            rel: 0,
-            autoplay: 0,
-          },
-          events: {
-            onReady: (e) => {
-              clearTimeout(readyTimeout);
-              if (cancelled) return;
-              player.current = e.target;
-              e.target.setVolume(latest.current.volume);
-              if (latest.current.muted) e.target.mute();
-              setReady(true);
-              setLoading(false);
-              if (wantsPlay.current) e.target.playVideo();
-            },
-            onStateChange: (e) => {
-              if (cancelled) return;
-              setPlaying(e.data === 1);
-              setLoading(e.data === 3);
-              if (e.data === 1) {
-                setError("");
-                setTitle(e.target.getVideoData()?.title || "");
-              }
-            },
-            onError: (e) => {
-              if (cancelled) return;
-              setLoading(false);
-              setPlaying(false);
-              setError(
-                e.data === 101 || e.data === 150
-                  ? "Cette station ne permet pas la lecture intégrée. Ouvrez-la sur YouTube ou choisissez une autre station."
-                  : "Cette station est indisponible. Son direct a peut-être changé : vous pouvez modifier son URL.",
-              );
-            },
-            onAutoplayBlocked: () => {
-              setLoading(false);
-              setNotice("Appuyez sur lecture pour lancer la musique.");
-            },
-          },
-        });
-      })
-      .catch((e) => {
-        if (!cancelled) {
-          setError(e.message);
-          setLoading(false);
-        }
-      });
-    return () => {
-      cancelled = true;
-      clearTimeout(readyTimeout);
-      owned?.destroy();
-      player.current = null;
-    };
-  }, [consent, reloadPlayer]);
-  useEffect(() => {
-    setTitle("");
-    setError("");
-    if (!player.current || !ready) return;
-    if (wantsPlay.current)
-      player.current.loadVideoById(youtubeId(station.url)!);
-    else player.current.cueVideoById(youtubeId(station.url)!);
-  }, [station.id, station.url, ready]);
-  useEffect(() => {
-    player.current?.setVolume(volume);
-  }, [volume]);
-  useEffect(() => {
-    if (muted) player.current?.mute();
-    else player.current?.unMute();
-  }, [muted]);
   useEffect(() => {
     for (const [id, audio] of audios.current)
       audio.volume = (((soundVolumes[id] ?? 50) / 100) * master) / 100;
@@ -351,7 +299,6 @@ export default function App() {
     },
     [],
   );
-
   useEffect(() => {
     if (!timer.deadline) return;
     const tick = () =>
@@ -363,6 +310,12 @@ export default function App() {
           Date.now(),
           current.deep,
         );
+        if (
+          next.phase === current.phase &&
+          next.remaining === current.remaining &&
+          !next.complete
+        )
+          return current;
         if (next.phase !== current.phase || next.complete) {
           const alarm = new Audio(
             `${reference}/sounds/pomodoro/${next.complete ? "complete" : "phase"}.mp3`,
@@ -371,10 +324,10 @@ export default function App() {
           void alarm.play().catch(() => {});
           setNotice(
             next.complete
-              ? "Belle session. Votre cycle est terminé !"
+              ? t("Belle session. Votre cycle est terminé !")
               : next.phase % 2 === 0
-                ? "C’est l’heure de souffler. Bonne pause !"
-                : "On reprend en douceur.",
+                ? t("C’est l’heure de souffler. Bonne pause !")
+                : t("On reprend en douceur."),
           );
         }
         return {
@@ -385,9 +338,9 @@ export default function App() {
         };
       });
     tick();
-    const id = setInterval(tick, 250);
+    const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [timer.deadline, alarmVolume, setTimer]);
+  }, [timer.deadline, alarmVolume, setTimer, t]);
   useEffect(() => {
     document.title = timer.deadline
       ? `${formatTime(timer.remaining)} · lofeur`
@@ -398,30 +351,44 @@ export default function App() {
     document.addEventListener("fullscreenchange", onFullscreen);
     return () => document.removeEventListener("fullscreenchange", onFullscreen);
   }, []);
+  function changeVideo(enabled: boolean) {
+    if (enabled && radio.requested) setConsent(true);
+    setVideo(enabled);
+  }
   function togglePlay() {
-    if (!consent) {
-      wantsPlay.current = true;
-      setConsent(true);
-      return;
-    }
-    if (playing) {
-      wantsPlay.current = false;
-      player.current?.pauseVideo();
-    } else {
-      wantsPlay.current = true;
-      if (error) setReloadPlayer((n) => n + 1);
-      else player.current?.playVideo();
+    if (playing || loading) radio.pause();
+    else {
+      if (video && !consent) setConsent(true);
+      radio.play();
     }
   }
   function choose(s: Station) {
-    wantsPlay.current = true;
-    if (!consent) setConsent(true);
+    if (video && !consent) setConsent(true);
     setSelected(s.id);
-    if (s.id === station.id) player.current?.playVideo();
+    radio.play();
   }
   function skip(dir: number) {
-    const index = stations.findIndex((s) => s.id === station.id);
-    choose(stations[(index + dir + stations.length) % stations.length]);
+    const available = sortStations(
+      stations,
+      video,
+      catalogHealth.health,
+      liked,
+    ).filter(
+      (s) =>
+        !stationState(
+          s,
+          video,
+          catalogHealth.health,
+          catalogHealth.failed(s, video),
+        ).unavailable,
+    );
+    if (!available.length) return;
+    const index = available.findIndex((s) => s.id === station.id);
+    choose(
+      available[
+        (Math.max(0, index) + dir + available.length) % available.length
+      ],
+    );
   }
   function toggleLike(id: string, sound = false) {
     const setter = sound ? setSoundLiked : setLiked;
@@ -434,9 +401,18 @@ export default function App() {
     setQuery("");
     setFavoritesOnly(false);
   }
+  function releaseSound(id: string) {
+    const audio = audios.current.get(id);
+    if (audio) {
+      audio.pause();
+      audio.removeAttribute("src");
+      audio.load();
+      audios.current.delete(id);
+    }
+  }
   async function toggleSound(id: string) {
     if (soundActive.includes(id)) {
-      audios.current.get(id)?.pause();
+      releaseSound(id);
       setSoundActive((x) => x.filter((s) => s !== id));
       return;
     }
@@ -453,8 +429,12 @@ export default function App() {
       await audio.play();
       setSoundActive((x) => (x.includes(id) ? x : [...x, id]));
     } catch {
+      releaseSound(id);
       setNotice(
-        `Impossible de lire « ${sound[1]} ». Vérifiez votre connexion puis réessayez.`,
+        t(
+          "Impossible de lire « {name} ». Vérifiez votre connexion puis réessayez.",
+          { name: t(sound[1]) },
+        ),
       );
     }
   }
@@ -463,7 +443,7 @@ export default function App() {
       if (document.fullscreenElement) await document.exitFullscreen();
       else await document.documentElement.requestFullscreen();
     } catch {
-      setNotice("Le plein écran n’est pas disponible dans ce navigateur.");
+      setNotice(t("Le plein écran n’est pas disponible dans ce navigateur."));
     }
   }
   function resetPhase() {
@@ -506,6 +486,7 @@ export default function App() {
         setPanel(null);
         setMenu(false);
         setSettings(false);
+        setSceneSettings(false);
       }
       if (e.code === "Space") {
         e.preventDefault();
@@ -537,30 +518,34 @@ export default function App() {
       if (!isStations(data)) throw new Error();
       setStations(data.map((s) => ({ ...s, cover: safeImage(s.cover) })));
       setSelected(data[0].id);
-      setNotice(`${data.length} stations importées.`);
+      setNotice(t("{count} stations importées.", { count: data.length }));
     } catch {
       setNotice(
-        "Fichier invalide : utilisez un export lofeur avec 1 à 100 stations YouTube valides et des identifiants uniques.",
+        t(
+          "Fichier invalide : utilisez un export lofeur avec 1 à 250 stations YouTube valides et des identifiants uniques.",
+        ),
       );
     }
     if (importRef.current) importRef.current.value = "";
   }
-  const stationList = stations
-    .filter(
+  const stationList = sortStations(
+    stations.filter(
       (s) =>
         (!favoritesOnly || liked.includes(s.id)) &&
         `${s.name} ${s.description}`
           .toLowerCase()
           .includes(query.toLowerCase()),
-    )
-    .sort(
-      (a, b) => Number(liked.includes(b.id)) - Number(liked.includes(a.id)),
-    );
+    ),
+    video,
+    catalogHealth.health,
+    liked,
+    (s) => catalogHealth.failed(s, video),
+  );
   const soundList = [...sounds]
     .filter(
       (s) =>
         (!favoritesOnly || soundLiked.includes(s[0])) &&
-        s[1].toLowerCase().includes(query.toLowerCase()),
+        t(s[1]).toLowerCase().includes(query.toLowerCase()),
     )
     .sort(
       (a, b) =>
@@ -568,49 +553,99 @@ export default function App() {
     );
   const phaseLabel =
     timer.phase % 2 === 1
-      ? "Concentration"
+      ? t("Concentration")
       : timer.phase === 8
-        ? "Longue pause"
-        : "Petite pause";
+        ? t("Longue pause")
+        : t("Petite pause");
   return (
     <main className={`desk ${zen ? "zen" : ""}`}>
-      <img
-        className="scene"
-        src={backgrounds[theme]}
-        alt="Un bureau chaleureux, une fenêtre sur la ville et un chat endormi"
-      />
-      <div
-        className={`video-scene ${playing ? "is-playing" : ""}`}
-        ref={playerHost}
-        aria-label="Lecteur vidéo YouTube"
-      />
+      {video ? (
+        <img
+          className="scene"
+          src={backgrounds[theme]}
+          alt={t(
+            "Un bureau chaleureux, une fenêtre sur la ville et un chat endormi",
+          )}
+        />
+      ) : (
+        <ProceduralScene options={sceneOptions} />
+      )}
+      {video && (
+        <div
+          className={`video-scene ${playing ? "is-playing" : ""}`}
+          ref={playerHost}
+          aria-label={t("Lecteur vidéo YouTube")}
+        />
+      )}
       <div className="scene-shade" />
       <header className="topbar ui">
         <a className="brand" href="/" aria-label="lofeur, accueil">
-          <img src="/logo.svg" alt="" />
-          <span>lofeur</span>
+          <img
+            className="wordmark"
+            src="/logo.svg"
+            alt="lofeur"
+            width="184"
+            height="54"
+          />
         </a>
         <div className="top-actions">
+          <label className="language-control glass">
+            <Languages size={17} />
+            <select
+              aria-label={t("Langue")}
+              value={locale}
+              onChange={(e) => setLocale(e.target.value as typeof locale)}
+            >
+              {locales.map((l) => (
+                <option key={l.code} value={l.code}>
+                  {l.name}
+                </option>
+              ))}
+            </select>
+          </label>
           <IconButton
-            label={fullscreen ? "Quitter le plein écran" : "Plein écran (F)"}
+            label={video ? t("Désactiver la vidéo") : t("Activer la vidéo")}
+            active={video}
+            aria-pressed={video}
+            onClick={() => changeVideo(!video)}
+          >
+            {video ? <Video /> : <VideoOff />}
+          </IconButton>
+          <IconButton
+            label={t("Apparence du fond")}
+            active={sceneSettings}
+            aria-expanded={sceneSettings}
+            onClick={() => setSceneSettings((v) => !v)}
+          >
+            <Palette />
+          </IconButton>
+          <IconButton
+            className="fullscreen-control"
+            label={
+              fullscreen ? t("Quitter le plein écran") : t("Plein écran (F)")
+            }
             onClick={toggleFullscreen}
           >
             {fullscreen ? <Minimize /> : <Maximize />}
           </IconButton>
           <IconButton
-            label={theme === "dark" ? "Passer au jour" : "Passer à la nuit"}
+            className="theme-control"
+            label={
+              theme === "dark" ? t("Passer au jour") : t("Passer à la nuit")
+            }
             onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
           >
             {theme === "dark" ? <Sun /> : <Moon />}
           </IconButton>
           <IconButton
-            label="Masquer l’interface (H)"
+            className="zen-control"
+            label={t("Masquer l’interface (H)")}
             onClick={() => setZen(true)}
           >
             <EyeOff />
           </IconButton>
           <IconButton
-            label="Menu"
+            label={t("Menu")}
             active={menu}
             aria-expanded={menu}
             onClick={() => setMenu((m) => !m)}
@@ -620,7 +655,25 @@ export default function App() {
         </div>
       </header>
       {menu && (
-        <nav className="menu glass ui" aria-label="Réglages du bureau">
+        <nav className="menu glass ui" aria-label={t("Réglages du bureau")}>
+          <button
+            onClick={() => {
+              setTheme((v) => (v === "dark" ? "light" : "dark"));
+              setMenu(false);
+            }}
+          >
+            <Sun />
+            {t(theme === "dark" ? "Passer au jour" : "Passer à la nuit")}
+          </button>
+          <button
+            onClick={() => {
+              setZen(true);
+              setMenu(false);
+            }}
+          >
+            <EyeOff />
+            {t("Masquer l’interface")}
+          </button>
           <button
             onClick={() => {
               setPanel("stations");
@@ -628,7 +681,7 @@ export default function App() {
             }}
           >
             <Radio />
-            Gérer mes stations
+            {t("Gérer mes stations")}
           </button>
           <button
             onClick={() => {
@@ -637,7 +690,9 @@ export default function App() {
             }}
           >
             <Timer />
-            {timerVisible ? "Masquer" : "Afficher"} le Pomodoro
+            {timerVisible
+              ? t("Masquer le Pomodoro")
+              : t("Afficher le Pomodoro")}
           </button>
           <button
             onClick={() => {
@@ -645,31 +700,33 @@ export default function App() {
               setMenu(false);
             }}
           >
-            <Info />À propos & raccourcis
+            <Info />
+            {t("À propos & raccourcis")}
           </button>
           <button
             onClick={() => {
-              wantsPlay.current = false;
-              player.current?.pauseVideo();
+              radio.pause();
               setConsent(false);
-              setPlaying(false);
               setMenu(false);
-              setNotice("Le lecteur YouTube a été désactivé.");
+              setNotice(t("La radio est arrêtée."));
             }}
           >
             <Square />
-            Désactiver YouTube
+            {t("Arrêter la radio")}
           </button>
         </nav>
       )}
-      <section className="now-playing glass ui" aria-label="Station actuelle">
+      <section
+        className="now-playing glass ui"
+        aria-label={t("Station actuelle")}
+      >
         <div className="now-cover">
           <Cover
             station={song?.art ? { ...station, cover: song.art } : station}
           />
         </div>
         <div className="now-copy">
-          <span className="muted small">À l’écoute</span>
+          <span className="muted small">{t("À l’écoute")}</span>
           <h1>{song?.artist || station.name}</h1>
           <p title={song?.title || title || station.description}>
             {song?.title || title || station.description}
@@ -677,21 +734,30 @@ export default function App() {
         </div>
         <Waves playing={playing} />
       </section>
-      {!consent && (
+      {(!video || !consent) && !radio.requested && (
         <div className="welcome-play ui">
           <button className="glass start-listening" onClick={togglePlay}>
-            <Play fill="currentColor" /> Entrer dans ma bulle{" "}
-            <span>Écouter avec YouTube</span>
+            <Play fill="currentColor" />
+            {t("Entrer dans ma bulle")}{" "}
+            <span>
+              {video ? t("Écouter avec YouTube") : t("Audio seul · mode léger")}
+            </span>
           </button>
           <small>
-            En lançant la radio, vous activez le lecteur YouTube et ses cookies.
+            {video
+              ? t(
+                  "En lançant la radio, vous activez le lecteur YouTube et ses cookies.",
+                )
+              : t("Sans vidéo, sans lecteur YouTube. Juste la musique.")}
           </small>
         </div>
       )}
-      {consent && !playing && !error && (
+      {video && consent && !playing && !error && (
         <button
           className="center-play glass ui"
-          aria-label={loading ? "Chargement du lecteur" : "Lancer la radio"}
+          aria-label={
+            loading ? t("Chargement du lecteur") : t("Lancer la radio")
+          }
           disabled={loading}
           onClick={togglePlay}
         >
@@ -700,43 +766,60 @@ export default function App() {
       )}
       {error && (
         <div className="player-error glass ui" role="alert">
-          <p>{error}</p>
+          <p>{t(error)}</p>
           <div>
             <button
               className="text-button"
               onClick={() => {
-                wantsPlay.current = true;
-                setReloadPlayer((n) => n + 1);
+                radio.play();
               }}
             >
-              Réessayer
+              {t("Réessayer")}
             </button>
+            {!video && !audioSource(station) && (
+              <button className="text-button" onClick={() => changeVideo(true)}>
+                {t("Activer la vidéo")}
+              </button>
+            )}
             <a href={station.url} target="_blank" rel="noreferrer">
-              Ouvrir sur YouTube <ExternalLink size={14} />
+              {t("Ouvrir sur YouTube")}
+              <ExternalLink size={14} />
             </a>
           </div>
         </div>
+      )}
+      {sceneSettings && (
+        <SceneSettings
+          video={video}
+          options={sceneOptions}
+          setOptions={setSceneOptions}
+          onClose={() => setSceneSettings(false)}
+        />
       )}
       <div className="left-dock ui">
         {panel && (
           <section
             className="browser-panel glass"
-            aria-label={panel === "stations" ? "Stations" : "Ambiances sonores"}
+            aria-label={
+              panel === "stations" ? t("Stations") : t("Ambiances sonores")
+            }
           >
             <div className="panel-header">
               <div>
                 <h2>
                   {panel === "stations" ? <Radio /> : <AudioLines />}
-                  {panel === "stations" ? "Stations" : "Ambiances sonores"}
+                  {panel === "stations"
+                    ? t("Stations")
+                    : t("Ambiances sonores")}
                 </h2>
                 <p>
                   {panel === "stations"
-                    ? "À chaque humeur, sa fréquence."
-                    : "Composez votre petit coin de calme."}
+                    ? t("À chaque humeur, sa fréquence.")
+                    : t("Composez votre petit coin de calme.")}
                 </p>
               </div>
               <IconButton
-                label="Fermer le panneau"
+                label={t("Fermer le panneau")}
                 onClick={() => setPanel(null)}
               >
                 <X />
@@ -746,14 +829,14 @@ export default function App() {
               <label className="search">
                 <Search size={16} />
                 <input
-                  aria-label="Rechercher"
+                  aria-label={t("Rechercher")}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Rechercher…"
+                  placeholder={t("Rechercher…")}
                 />
               </label>
               <IconButton
-                label="Afficher les favoris"
+                label={t("Afficher les favoris")}
                 active={favoritesOnly}
                 aria-pressed={favoritesOnly}
                 onClick={() => setFavoritesOnly((x) => !x)}
@@ -762,7 +845,20 @@ export default function App() {
               </IconButton>
               {panel === "stations" && (
                 <IconButton
-                  label="Ajouter une station"
+                  label={t(
+                    catalogHealth.checking
+                      ? "Vérification en cours…"
+                      : "Vérifier les stations",
+                  )}
+                  onClick={catalogHealth.refresh}
+                >
+                  <RotateCcw />
+                </IconButton>
+              )}
+              {panel === "stations" && (
+                <IconButton
+                  label={t("Ajouter une station")}
+                  disabled={stations.length >= 250}
                   onClick={() => setEdit("new")}
                 >
                   <Plus />
@@ -771,15 +867,23 @@ export default function App() {
             </div>
             <div className="panel-scroll">
               {panel === "stations"
-                ? stationList.map((s) => (
+                ? stationList.slice(0, visibleStations).map((s) => (
                     <article
-                      className={`station-row ${s.id === station.id ? "selected" : ""}`}
+                      className={`station-row ${s.id === station.id ? "selected" : ""} ${stationState(s, video, catalogHealth.health, catalogHealth.failed(s, video)).unavailable ? "unavailable" : ""}`}
                       key={s.id}
                     >
                       <button
                         className="station-select"
+                        disabled={
+                          stationState(
+                            s,
+                            video,
+                            catalogHealth.health,
+                            catalogHealth.failed(s, video),
+                          ).unavailable
+                        }
                         onClick={() => choose(s)}
-                        aria-label={`Écouter ${s.name}`}
+                        aria-label={t("Écouter {name}", { name: s.name })}
                         aria-pressed={s.id === station.id}
                       >
                         <div className="station-cover">
@@ -787,15 +891,39 @@ export default function App() {
                           {s.id === station.id && playing && <Waves playing />}
                         </div>
                         <div>
-                          <h3>{s.name}</h3>
+                          <h3>
+                            {stationState(s, video, catalogHealth.health)
+                              .live && (
+                              <span
+                                className="live-dot"
+                                aria-label={t("En direct")}
+                              />
+                            )}{" "}
+                            <span className="station-name">{s.name}</span>
+                          </h3>
+                          {stationState(
+                            s,
+                            video,
+                            catalogHealth.health,
+                            catalogHealth.failed(s, video),
+                          ).unavailable ? (
+                            <span className="station-state">
+                              {t("Indisponible")}
+                            </span>
+                          ) : stationState(s, video, catalogHealth.health)
+                              .requiresVideo ? (
+                            <span className="station-state">
+                              {t("Vidéo YouTube requise")}
+                            </span>
+                          ) : null}
                           <p>
-                            {s.description || "Votre fréquence personnelle"}
+                            {s.description || t("Votre fréquence personnelle")}
                           </p>
                         </div>
                       </button>
                       <div className="row-actions">
                         <IconButton
-                          label={`Favori : ${s.name}`}
+                          label={t("Favori : {name}", { name: s.name })}
                           aria-pressed={liked.includes(s.id)}
                           active={liked.includes(s.id)}
                           onClick={() => toggleLike(s.id)}
@@ -807,7 +935,7 @@ export default function App() {
                           />
                         </IconButton>
                         <IconButton
-                          label={`Modifier ${s.name}`}
+                          label={t("Modifier {name}", { name: s.name })}
                           onClick={() => {
                             setDeleteId(null);
                             setEdit(s);
@@ -825,7 +953,12 @@ export default function App() {
                     >
                       <button
                         className="sound-toggle"
-                        aria-label={`${soundActive.includes(s[0]) ? "Arrêter" : "Écouter"} ${s[1]}`}
+                        aria-label={t(
+                          soundActive.includes(s[0])
+                            ? "Arrêter {name}"
+                            : "Écouter {name}",
+                          { name: t(s[1]) },
+                        )}
                         aria-pressed={soundActive.includes(s[0])}
                         onClick={() => toggleSound(s[0])}
                       >
@@ -842,9 +975,9 @@ export default function App() {
                       </button>
                       <div className="sound-controls">
                         <div>
-                          <h3>{s[1]}</h3>
+                          <h3>{t(s[1])}</h3>
                           <IconButton
-                            label={`Favori : ${s[1]}`}
+                            label={t("Favori : {name}", { name: t(s[1]) })}
                             active={soundLiked.includes(s[0])}
                             aria-pressed={soundLiked.includes(s[0])}
                             onClick={() => toggleLike(s[0], true)}
@@ -860,7 +993,7 @@ export default function App() {
                         </div>
                         <input
                           type="range"
-                          aria-label={`Volume ${s[1]}`}
+                          aria-label={t("Volume {name}", { name: t(s[1]) })}
                           min="0"
                           max="100"
                           value={soundVolumes[s[0]] ?? 50}
@@ -874,13 +1007,23 @@ export default function App() {
                       </div>
                     </article>
                   ))}
+              {panel === "stations" && stationList.length > visibleStations && (
+                <button
+                  className="load-more text-button"
+                  onClick={() => setVisibleStations((n) => n + 24)}
+                >
+                  {t("Afficher plus ({count})", {
+                    count: stationList.length - visibleStations,
+                  })}
+                </button>
+              )}
               {(panel === "stations"
                 ? stationList.length
                 : soundList.length) === 0 && (
                 <p className="empty">
                   {favoritesOnly
-                    ? "Ajoutez vos premiers favoris avec le cœur."
-                    : "Aucun résultat. Essayez un autre mot."}
+                    ? t("Ajoutez vos premiers favoris avec le cœur.")
+                    : t("Aucun résultat. Essayez un autre mot.")}
                 </p>
               )}
             </div>
@@ -888,21 +1031,23 @@ export default function App() {
               <div className="panel-footer">
                 <button onClick={exportStations}>
                   <Download />
-                  Exporter
+                  {t("Exporter")}
                 </button>
                 <button onClick={() => importRef.current?.click()}>
                   <Upload />
-                  Importer
+                  {t("Importer")}
                 </button>
                 <button
                   onClick={() => setConfirmReset((v) => !v)}
-                  title="Restaurer les stations d’origine"
+                  title={t("Restaurer les stations d’origine")}
                 >
                   <RotateCcw />
                 </button>
                 {confirmReset && (
                   <div className="reset-confirm">
-                    <p>Remplacer vos stations par les 18 radios d’origine ?</p>
+                    <p>
+                      {t("Remplacer vos stations par le catalogue d’origine ?")}
+                    </p>
                     <button
                       onClick={() => {
                         setStations(defaults);
@@ -910,10 +1055,10 @@ export default function App() {
                         setConfirmReset(false);
                       }}
                     >
-                      Restaurer
+                      {t("Restaurer")}
                     </button>
                     <button onClick={() => setConfirmReset(false)}>
-                      Annuler
+                      {t("Annuler")}
                     </button>
                   </div>
                 )}
@@ -923,7 +1068,7 @@ export default function App() {
                 <Volume2 size={17} />
                 <input
                   type="range"
-                  aria-label="Volume général des ambiances"
+                  aria-label={t("Volume général des ambiances")}
                   value={master}
                   min="0"
                   max="100"
@@ -931,11 +1076,11 @@ export default function App() {
                 />
                 <button
                   onClick={() => {
-                    for (const a of audios.current.values()) a.pause();
+                    for (const id of audios.current.keys()) releaseSound(id);
                     setSoundActive([]);
                   }}
                 >
-                  Tout arrêter
+                  {t("Tout arrêter")}
                 </button>
               </div>
             )}
@@ -943,20 +1088,22 @@ export default function App() {
         )}
         <section
           className="radio-player glass"
-          aria-label="Commandes de la radio"
+          aria-label={t("Commandes de la radio")}
         >
           <div className="radio-top">
-            <span className="live-dot" />
+            {currentStationState.live && (
+              <span className="live-dot" aria-label={t("En direct")} />
+            )}
             <strong>
               {loading
-                ? "Connexion…"
+                ? t("Connexion…")
                 : playing
-                  ? "En direct"
-                  : "Prêt à écouter"}
+                  ? t(currentStationState.live ? "En direct" : "À l’écoute")
+                  : t("Prêt à écouter")}
             </strong>
             <div className="radio-top-actions">
               <IconButton
-                label="Station favorite"
+                label={t("Station favorite")}
                 active={liked.includes(station.id)}
                 aria-pressed={liked.includes(station.id)}
                 onClick={() => toggleLike(station.id)}
@@ -967,8 +1114,8 @@ export default function App() {
               </IconButton>
               <a
                 className="icon-button"
-                title="Ouvrir la station sur YouTube"
-                aria-label="Ouvrir la station sur YouTube"
+                title={t("Ouvrir la station sur YouTube")}
+                aria-label={t("Ouvrir la station sur YouTube")}
                 href={station.url}
                 target="_blank"
                 rel="noreferrer"
@@ -978,11 +1125,14 @@ export default function App() {
             </div>
           </div>
           <div className="radio-controls">
-            <IconButton label="Station précédente" onClick={() => skip(-1)}>
+            <IconButton
+              label={t("Station précédente")}
+              onClick={() => skip(-1)}
+            >
               <SkipBack fill="currentColor" />
             </IconButton>
             <IconButton
-              label={playing ? "Mettre en pause" : "Écouter la radio"}
+              label={playing ? t("Mettre en pause") : t("Écouter la radio")}
               disabled={loading}
               onClick={togglePlay}
             >
@@ -992,19 +1142,19 @@ export default function App() {
                 <Play fill="currentColor" />
               )}
             </IconButton>
-            <IconButton label="Station suivante" onClick={() => skip(1)}>
+            <IconButton label={t("Station suivante")} onClick={() => skip(1)}>
               <SkipForward fill="currentColor" />
             </IconButton>
             <span className="control-spacer" />
             <IconButton
-              label={muted ? "Rétablir le son (M)" : "Couper le son (M)"}
+              label={muted ? t("Rétablir le son (M)") : t("Couper le son (M)")}
               onClick={() => setMuted((x) => !x)}
             >
               {muted || volume === 0 ? <VolumeX /> : <Volume2 />}
             </IconButton>
             <input
               type="range"
-              aria-label="Volume de la radio"
+              aria-label={t("Volume de la radio")}
               min="0"
               max="100"
               value={volume}
@@ -1022,7 +1172,7 @@ export default function App() {
             onClick={() => togglePanel("stations")}
           >
             <Radio />
-            Stations
+            {t("Stations")}
           </button>
           <button
             className={`glass ${panel === "sounds" ? "active" : ""}`}
@@ -1030,7 +1180,7 @@ export default function App() {
             onClick={() => togglePanel("sounds")}
           >
             <AudioLines />
-            Ambiances
+            {t("Ambiances")}
             {soundActive.length > 0 && (
               <span className="count">{soundActive.length}</span>
             )}
@@ -1038,15 +1188,15 @@ export default function App() {
         </div>
       </div>
       {timerVisible && (
-        <section className="pomodoro glass ui" aria-label="Pomodoro">
+        <section className="pomodoro glass ui" aria-label={t("Pomodoro")}>
           <div className="timer-header">
             <span className="timer-symbol">
               {timer.phase % 2 === 1 ? <Timer /> : <Coffee />}
             </span>
-            <h2>{phaseLabel}</h2>
+            <h2>{t(phaseLabel)}</h2>
             <span className="phase-count">{timer.phase} / 8</span>
             <IconButton
-              label="Masquer le Pomodoro"
+              label={t("Masquer le Pomodoro")}
               onClick={() => setTimerVisible(false)}
             >
               <X />
@@ -1055,13 +1205,13 @@ export default function App() {
           <div
             className="timer-display"
             role="timer"
-            aria-label={`${phaseLabel} : ${formatTime(timer.remaining)}`}
+            aria-label={`${t(phaseLabel)} : ${formatTime(timer.remaining)}`}
           >
             {formatTime(timer.remaining)}
           </div>
           <div
             className="phase-track"
-            aria-label={`Phase ${timer.phase} sur 8`}
+            aria-label={t("Phase {phase} sur 8", { phase: timer.phase })}
           >
             {Array.from({ length: 8 }, (_, i) => (
               <span
@@ -1083,8 +1233,8 @@ export default function App() {
             <IconButton
               label={
                 timer.deadline
-                  ? "Mettre le minuteur en pause"
-                  : "Démarrer le minuteur"
+                  ? t("Mettre le minuteur en pause")
+                  : t("Démarrer le minuteur")
               }
               onClick={toggleTimer}
             >
@@ -1094,14 +1244,17 @@ export default function App() {
                 <Play fill="currentColor" />
               )}
             </IconButton>
-            <IconButton label="Réinitialiser cette phase" onClick={resetPhase}>
+            <IconButton
+              label={t("Réinitialiser cette phase")}
+              onClick={resetPhase}
+            >
               <Square fill="currentColor" />
             </IconButton>
-            <IconButton label="Recommencer le cycle" onClick={resetCycle}>
+            <IconButton label={t("Recommencer le cycle")} onClick={resetCycle}>
               <RotateCcw />
             </IconButton>
             <IconButton
-              label="Réglages du Pomodoro"
+              label={t("Réglages du Pomodoro")}
               active={settings}
               aria-expanded={settings}
               onClick={() => setSettings((x) => !x)}
@@ -1112,7 +1265,7 @@ export default function App() {
           {settings && (
             <div className="timer-settings">
               <label>
-                Votre rythme
+                {t("Votre rythme")}
                 <select
                   value={timer.deep ? "deep" : "focus"}
                   onChange={(e) => {
@@ -1125,16 +1278,16 @@ export default function App() {
                     });
                   }}
                 >
-                  <option value="focus">Classique · 25 / 5 min</option>
-                  <option value="deep">Long · 50 / 10 min</option>
+                  <option value="focus">{t("Classique · 25 / 5 min")}</option>
+                  <option value="deep">{t("Long · 50 / 10 min")}</option>
                 </select>
                 <ChevronDown size={14} />
               </label>
               <label>
-                Volume de l’alarme
+                {t("Volume de l’alarme")}
                 <input
                   type="range"
-                  aria-label="Volume de l’alarme"
+                  aria-label={t("Volume de l’alarme")}
                   min="0"
                   max="100"
                   value={alarmVolume}
@@ -1142,7 +1295,9 @@ export default function App() {
                 />
               </label>
               <p>
-                4 sessions, puis une pause de {timer.deep ? 20 : 15} minutes.
+                {t("4 sessions, puis une pause de {minutes} minutes.", {
+                  minutes: timer.deep ? 20 : 15,
+                })}
               </p>
             </div>
           )}
@@ -1151,8 +1306,8 @@ export default function App() {
       <div className="right-dock ui">
         <button
           className={`glass icon-button ${timerVisible ? "active" : ""}`}
-          aria-label="Afficher ou masquer le Pomodoro"
-          title="Pomodoro"
+          aria-label={t("Afficher ou masquer le Pomodoro")}
+          title={t("Pomodoro")}
           aria-pressed={timerVisible}
           onClick={() => setTimerVisible((v) => !v)}
         >
@@ -1161,8 +1316,8 @@ export default function App() {
       </div>
       <button
         className="restore-ui glass icon-button"
-        title="Afficher l’interface (H)"
-        aria-label="Afficher l’interface"
+        title={t("Afficher l’interface (H)")}
+        aria-label={t("Afficher l’interface")}
         onClick={() => setZen(false)}
       >
         <Eye />
@@ -1172,7 +1327,7 @@ export default function App() {
           <Headphones size={18} />
           <p>{notice}</p>
           <IconButton
-            label="Fermer la notification"
+            label={t("Fermer la notification")}
             onClick={() => setNotice("")}
           >
             <X />
@@ -1184,12 +1339,12 @@ export default function App() {
         ref={importRef}
         type="file"
         accept="application/json,.json"
-        aria-label="Importer des stations"
+        aria-label={t("Importer des stations")}
         onChange={(e) => importStations(e.target.files?.[0])}
       />
       <dialog
         ref={modalRef}
-        aria-label={edit ? "Gestion des stations" : "À propos de lofeur"}
+        aria-label={edit ? t("Gestion des stations") : t("À propos de lofeur")}
         className="modal glass"
         onCancel={() => {
           setEdit(null);
@@ -1219,7 +1374,7 @@ export default function App() {
                   : all.map((old) => (old.id === s.id ? s : old)),
               );
               setEdit(null);
-              setNotice("Station enregistrée.");
+              setNotice(t("Station enregistrée."));
             }}
             onDelete={() => {
               if (edit === "new") return;
@@ -1236,48 +1391,49 @@ export default function App() {
         {about && (
           <>
             <div className="modal-heading">
-              <h2>Bienvenue chez lofeur</h2>
-              <IconButton label="Fermer" onClick={() => setAbout(false)}>
+              <h2>{t("Bienvenue chez lofeur")}</h2>
+              <IconButton label={t("Fermer")} onClick={() => setAbout(false)}>
                 <X />
               </IconButton>
             </div>
             <div className="about-content">
-              <img src="/logo.svg" alt="Logo lofeur" />
-              <p>Un bureau, de la musique et le temps de se poser.</p>
+              <img className="about-wordmark" src="/logo.svg" alt="lofeur" />
+              <p>{t("Un bureau, de la musique et le temps de se poser.")}</p>
               <p>
-                Vos stations, favoris et réglages restent dans ce navigateur.
-                Aucun compte, aucun suivi publicitaire.
+                {t(
+                  "Vos stations, favoris et réglages restent dans ce navigateur. Aucun compte, aucun suivi publicitaire.",
+                )}
               </p>
               <dl>
                 <div>
                   <dt>
-                    <kbd>Espace</kbd>
+                    <kbd>{t("Espace")}</kbd>
                   </dt>
-                  <dd>Lecture / pause</dd>
+                  <dd>{t("Lecture / pause")}</dd>
                 </div>
                 <div>
                   <dt>
                     <kbd>F</kbd>
                   </dt>
-                  <dd>Plein écran</dd>
+                  <dd>{t("Plein écran")}</dd>
                 </div>
                 <div>
                   <dt>
                     <kbd>H</kbd>
                   </dt>
-                  <dd>Masquer l’interface</dd>
+                  <dd>{t("Masquer l’interface")}</dd>
                 </div>
                 <div>
                   <dt>
                     <kbd>M</kbd>
                   </dt>
-                  <dd>Couper le son</dd>
+                  <dd>{t("Couper le son")}</dd>
                 </div>
               </dl>
               <p className="small muted">
-                Projet indépendant inspiré de Lofi Desk. Musique, illustrations
-                et ambiances : Lofi Girl. Le lecteur YouTube est activé
-                uniquement à votre demande.
+                {t(
+                  "Projet indépendant inspiré de Lofi Desk. Musique, illustrations et ambiances : Lofi Girl. Le lecteur YouTube est activé uniquement à votre demande.",
+                )}
               </p>
               <a
                 className="text-button"
@@ -1285,7 +1441,8 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Le projet sur GitHub <ExternalLink size={15} />
+                {t("Le projet sur GitHub")}
+                <ExternalLink size={15} />
               </a>
             </div>
           </>
@@ -1321,6 +1478,9 @@ function StationForm({
   onSave(s: Station): void;
   onDelete(): void;
 }) {
+  const { t } = useI18n();
+  const [audioUrl, setAudioUrl] = useState(station?.audioUrl || "");
+  const [kind, setKind] = useState<"live" | "video">(station?.kind || "video");
   const [name, setName] = useState(station?.name || "");
   const [url, setUrl] = useState(station?.url || "");
   const [description, setDescription] = useState(station?.description || "");
@@ -1332,17 +1492,23 @@ function StationForm({
         e.preventDefault();
         const id = youtubeId(url);
         if (!name.trim()) {
-          setError("Donnez un nom à votre station.");
+          setError(t("Donnez un nom à votre station."));
           return;
         }
         if (!id) {
           setError(
-            "Saisissez une URL YouTube valide (watch, live, youtu.be ou embed).",
+            t(
+              "Saisissez une URL YouTube valide (watch, live, youtu.be ou embed).",
+            ),
           );
           return;
         }
         if (cover && !safeImage(cover)) {
-          setError("L’image doit utiliser une URL HTTPS.");
+          setError(t("L’image doit utiliser une URL HTTPS."));
+          return;
+        }
+        if (audioUrl && !validAudioUrl(audioUrl)) {
+          setError(t("Le flux audio doit utiliser une URL HTTPS."));
           return;
         }
         onSave({
@@ -1351,29 +1517,43 @@ function StationForm({
           description: description.trim(),
           url: `https://www.youtube.com/watch?v=${id}`,
           cover: cover.trim(),
+          audioUrl: audioUrl.trim(),
+          kind,
         });
       }}
     >
       <div className="modal-heading">
-        <h2>{station ? "Modifier la station" : "Une nouvelle fréquence"}</h2>
-        <IconButton label="Fermer" type="button" onClick={onClose}>
+        <h2>
+          {station ? t("Modifier la station") : t("Une nouvelle fréquence")}
+        </h2>
+        <IconButton label={t("Fermer")} type="button" onClick={onClose}>
           <X />
         </IconButton>
       </div>
       <div className="form-fields">
         <label>
-          Nom de la station
+          {t("Nom de la station")}
           <input
             autoFocus
             required
             maxLength={80}
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Ma radio du dimanche"
+            placeholder={t("Ma radio du dimanche")}
           />
         </label>
         <label>
-          URL YouTube
+          {t("Type de station")}
+          <select
+            value={kind}
+            onChange={(e) => setKind(e.target.value as "live" | "video")}
+          >
+            <option value="live">{t("En direct")}</option>
+            <option value="video">{t("Enregistrement")}</option>
+          </select>
+        </label>
+        <label>
+          {t("URL YouTube")}
           <input
             required
             value={url}
@@ -1382,16 +1562,18 @@ function StationForm({
           />
         </label>
         <label>
-          Description <span className="muted">(facultatif)</span>
+          {t("Description")}
+          <span className="muted">{t("(facultatif)")}</span>
           <input
             maxLength={140}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Pour les journées tranquilles"
+            placeholder={t("Pour les journées tranquilles")}
           />
         </label>
         <label>
-          Image de couverture <span className="muted">(facultatif)</span>
+          {t("Image de couverture")}
+          <span className="muted">{t("(facultatif)")}</span>
           <input
             type="url"
             value={cover}
@@ -1399,14 +1581,30 @@ function StationForm({
             placeholder="https://…"
           />
         </label>
+        <label>
+          {t("Flux audio direct")}
+          <span className="muted">{t("(facultatif)")}</span>
+          <input
+            type="url"
+            value={audioUrl}
+            onChange={(e) => setAudioUrl(e.target.value)}
+            placeholder="https://…/radio.mp3"
+          />
+        </label>
+        <p className="small muted">
+          {t(
+            "Un flux MP3, AAC ou Ogg direct permet l’écoute sans vidéo. Une URL YouTube ne peut pas servir de flux audio direct.",
+          )}
+        </p>
         {error && (
           <p className="form-error" role="alert">
             {error}
           </p>
         )}
         <p className="small muted">
-          Les liens de directs et de vidéos YouTube sont acceptés. Sans image,
-          la miniature YouTube sera utilisée.
+          {t(
+            "Les liens de directs et de vidéos YouTube sont acceptés. Sans image, la miniature YouTube sera utilisée.",
+          )}
         </p>
       </div>
       <div className="form-footer">
@@ -1416,15 +1614,15 @@ function StationForm({
             disabled={!canDelete}
             type="button"
             onClick={onDelete}
-            title={!canDelete ? "Gardez au moins une station" : undefined}
+            title={!canDelete ? t("Gardez au moins une station") : undefined}
           >
             <Trash2 size={16} />
-            {confirmDelete ? "Confirmer la suppression" : "Supprimer"}
+            {confirmDelete ? t("Confirmer la suppression") : t("Supprimer")}
           </button>
         )}
         <button className="primary-button" type="submit">
           <Check size={17} />
-          Enregistrer
+          {t("Enregistrer")}
         </button>
       </div>
     </form>

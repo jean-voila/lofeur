@@ -13,7 +13,7 @@ Lofi Desk's JavaScript bundles are not included in the application.
 | Pomodoro alarm recordings                      | desk.lofigirl.com/sounds/pomodoro                 | Original public MP3 URLs                                                                               |
 | Gopher and Bolota typefaces                    | Public webfont assets served by desk.lofigirl.com | Local files in `public/fonts/` to preserve the reference typography without cross-origin font failures |
 | Icons                                          | Lucide                                            | ISC license, installed through npm                                                                     |
-| lofeur logo                                    | Original SVG                                      | Included in the source license                                                                         |
+| lofeur logo                                    | Fredoka typeface                                  | SVG outlines; font and SIL OFL 1.1 license included in `docs/branding/`                                |
 | README banner                                  | Original AI-generated illustration                | Generation prompt and provenance in `docs/brand.md`                                                    |
 
 The Lofi Girl media and third-party typefaces are not covered by this project's
@@ -27,3 +27,10 @@ Remote sources may change, be removed, or become unavailable. YouTube may show
 its own branding, promotions, advertisements or embedded restrictions. lofeur
 removes the original site's commerce widgets, announcements and account gates;
 it does not alter the content inside YouTube streams.
+
+The lightweight radio mode uses Lofi Girl’s public direct audio streams at
+`https://radio.lofigirl.com/listen/`. It does not extract audio from YouTube.
+Recorded mixes come from the user-selected official compilations playlist.
+
+Fredoka is separately licensed under SIL OFL 1.1 (`docs/branding/OFL.txt`).
+The generated illustration remains distinct from the real, font-based logo.

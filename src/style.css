@@ -1414,4 +1414,304 @@ select option {
   }
 }
 
-.now-copy h1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.now-copy h1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* No large composited blur layers or device-pixel-ratio canvas allocation. */
+.procedural-scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.brand .wordmark {
+  width: 156px;
+  height: auto;
+  border-radius: 0;
+  filter: drop-shadow(0 2px 3px #0004);
+}
+[data-theme="light"] .brand .wordmark {
+  filter: drop-shadow(0 2px 4px #0008);
+}
+.about-content > .about-wordmark {
+  width: 200px;
+  height: auto;
+}
+.language-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 8px;
+  pointer-events: auto;
+  border-radius: 8px;
+}
+.language-control select {
+  appearance: auto;
+  background: none;
+  border: 0;
+  width: 82px;
+  font-size: 12px;
+  cursor: pointer;
+  outline-offset: 0;
+}
+.scene-settings {
+  position: fixed;
+  right: 16px;
+  top: 68px;
+  width: 328px;
+  max-height: calc(100dvh - 90px);
+  overflow-y: auto;
+  z-index: 35;
+  scrollbar-width: thin;
+}
+.scene-settings .panel-header {
+  align-items: center;
+  padding: 12px 16px;
+}
+.scene-settings h2 {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.scene-fields {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.scene-fields fieldset {
+  margin: 0;
+  padding: 14px 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.scene-fields fieldset:disabled {
+  opacity: 0.45;
+}
+.scene-fields legend {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 0 8px 0 0;
+}
+.scene-fields label:not(.switch-row) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+}
+.scene-fields label:not(.switch-row) > select,
+.scene-fields input[type="range"] {
+  width: 100%;
+}
+.scene-fields select {
+  background: var(--input);
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.scene-fields input[type="range"] {
+  margin: 4px 0;
+}
+.scene-fields output {
+  font-size: 11px;
+  color: var(--muted);
+}
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+}
+.switch-row input {
+  appearance: none;
+  position: relative;
+  width: 34px;
+  height: 20px;
+  border-radius: 20px;
+  background: var(--line);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.switch-row input:after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform 0.15s;
+}
+.switch-row input:checked {
+  background: #467c6c;
+}
+.switch-row input:checked:after {
+  transform: translateX(14px);
+  background: #fff;
+}
+.color-fields {
+  display: flex;
+  gap: 12px;
+}
+.color-fields > label {
+  flex: 1;
+  min-width: 0;
+  font-size: 11px !important;
+}
+.color-fields input {
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 2px;
+  width: 100%;
+  height: 30px;
+  background: var(--input);
+  cursor: pointer;
+}
+html[data-locale="zh"] h1,
+html[data-locale="zh"] h2,
+html[data-locale="zh"] h3,
+html[data-locale="hi"] h1,
+html[data-locale="hi"] h2,
+html[data-locale="hi"] h3 {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+.timer-header h2 {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pomodoro .timer-header {
+  gap: 6px;
+}
+@media (max-width: 850px) {
+  .brand .wordmark {
+    width: 138px;
+  }
+  .language-control select {
+    width: 74px;
+  }
+  .top-actions {
+    gap: 5px;
+  }
+}
+@media (max-width: 640px) {
+  .brand .wordmark {
+    width: 108px;
+  }
+  .top-actions > .icon-button {
+    width: 32px;
+    height: 34px;
+  }
+  .top-actions > .fullscreen-control,
+  .top-actions > .theme-control,
+  .top-actions > .zen-control {
+    display: none !important;
+  }
+  .language-control {
+    height: 34px;
+    padding: 0 5px;
+    gap: 3px;
+  }
+  .language-control svg {
+    width: 14px;
+  }
+  .language-control select {
+    font-size: 11px;
+    width: 67px;
+  }
+  .scene-settings {
+    right: 12px;
+    top: 58px;
+    width: min(328px, calc(100vw - 24px));
+    max-height: calc(100dvh - 80px);
+  }
+  .start-listening {
+    font-size: 18px;
+  }
+  .timer-header h2 {
+    font-size: 11px;
+  }
+  .dock-buttons > button {
+    font-size: 12px;
+    gap: 6px;
+  }
+}
+@media (max-width: 360px) {
+  .brand .wordmark {
+    width: 86px;
+  }
+  .topbar {
+    left: 10px;
+    right: 10px;
+  }
+  .top-actions {
+    gap: 4px;
+  }
+  .language-control select {
+    width: 60px;
+  }
+}
+.station-select h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.station-select h3 .live-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin: 0;
+}
+.station-row.unavailable .station-select {
+  opacity: 0.4;
+  filter: grayscale(1);
+  cursor: not-allowed;
+}
+.station-row.unavailable .row-actions {
+  opacity: 0.65;
+}
+.station-state {
+  display: block;
+  font:
+    10px Gopher,
+    system-ui,
+    sans-serif;
+  color: var(--muted);
+  margin: 4px 0 0;
+}
+.load-more {
+  display: block;
+  width: 100%;
+  margin: 8px 0 4px;
+  font-size: 12px;
+}
+.station-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.form-fields select {
+  width: 100%;
+  padding: 12px;
+  background: var(--input);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  margin-top: 4px;
+  font-size: 14px;
+}
