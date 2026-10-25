@@ -10,7 +10,8 @@
     "test": "vitest run",
     "start": "npm run preview",
     "check:stations": "node scripts/check-stations.mjs",
-    "check:static": "node scripts/check-static.mjs"
+    "check:static": "node scripts/check-static.mjs",
+    "check:deployment": "node scripts/check-deployment.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

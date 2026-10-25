@@ -6,7 +6,9 @@ import { useRadio } from "./use-radio";
 import type { Station } from "./lib";
 import defaults from "./catalog";
 
-const fake = vi.hoisted(() => ({ destroy: vi.fn(), loader: vi.fn() }));
+const fake = vi.hoisted(() => ({
+  destroy: vi.fn(), loader: vi.fn(), ready: true, state: 1 as number | null,
+}));
 vi.mock("./youtube", () => ({
   youtube: async () => {
     fake.loader();
@@ -26,8 +28,9 @@ vi.mock("./youtube", () => ({
           this.frame.srcdoc = "<p>Test player</p>";
           element.replaceWith(this.frame);
           queueMicrotask(() => {
-            options.events.onReady({ target: this });
-            options.events.onStateChange({ data: 1, target: this });
+            if (fake.ready) options.events.onReady({ target: this });
+            if (fake.state !== null)
+              options.events.onStateChange({ data: fake.state, target: this });
           });
         }
         playVideo() {}
@@ -66,6 +69,8 @@ beforeEach(() => {
   played = [];
   fake.destroy.mockReset();
   fake.loader.mockReset();
+  fake.ready = true;
+  fake.state = 1;
   vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(function (
     this: HTMLMediaElement,
   ) {
@@ -83,6 +88,7 @@ afterEach(async () => {
   await act(async () => root.unmount());
   container.remove();
   vi.restoreAllMocks();
+  vi.useRealTimers();
 });
 async function render(video: boolean, station: Station = defaults[0]) {
   await act(async () => {
@@ -119,6 +125,26 @@ describe("media resource lifecycle", () => {
     expect(controls.playing).toBe(true);
     await act(async () => controls.pause());
     expect(played[1].hasAttribute("src")).toBe(false);
+  });
+  it("does not time out a responsive iframe while YouTube plays a long advert", async () => {
+    vi.useFakeTimers();
+    fake.state = -1;
+    await render(true);
+    await act(async () => controls.play());
+    await act(async () => vi.advanceTimersByTime(120000));
+    expect(controls.error).toBe("");
+    expect(controls.unavailable).toBe(false);
+    expect(controls.loading).toBe(true);
+  });
+  it("still detects an iframe that never becomes ready without disabling the station", async () => {
+    vi.useFakeTimers();
+    fake.ready = false;
+    fake.state = null;
+    await render(true);
+    await act(async () => controls.play());
+    await act(async () => vi.advanceTimersByTime(20000));
+    expect(controls.error).toContain("ne répond pas");
+    expect(controls.unavailable).toBe(false);
   });
   it("reports source failures without confusing autoplay restrictions", async () => {
     await render(false);

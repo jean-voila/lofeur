@@ -102,7 +102,7 @@ canonical URLs, reciprocal language links, a sitemap and structured data.
 The listening guide is available to people and crawlers alike. The language
 selector updates the URL while preserving playback.
 
-A local mobile Lighthouse audit measured **99 performance / 100 accessibility /
+A mobile Lighthouse audit of the public GitHub Pages site measured **99 performance / 100 accessibility /
 100 best practices / 100 SEO**. These scores are lab results, not ranking promises.
 See [SEO implementation and publication steps](docs/seo.md).
 

@@ -26,8 +26,9 @@ is inlined, one body font is preloaded, and font assets are fingerprinted.
 
 ## Measured result
 
-See `lighthouse-summary.json` for the captured audit. A local mobile Lighthouse
-run on the production build on 25 October 2026 reported:
+See `lighthouse-public-summary.json` for the public deployment audit and
+`lighthouse-summary.json` for the local comparison. Mobile Lighthouse on the
+public HTTPS site on 25 October 2026 reported:
 
 | Category       | Score |
 | -------------- | ----- |
@@ -36,8 +37,8 @@ run on the production build on 25 October 2026 reported:
 | Best practices | 100   |
 | SEO            | 100   |
 
-Measured FCP: 1.5 s; LCP: 2.1 s; total blocking time: 0 ms; CLS: 0.003.
-These are a local, simulated mobile lab run, not a guarantee of real-world Core
+Measured FCP: 1.5 s; LCP: 1.6 s; total blocking time: 0 ms; CLS: 0.004.
+These are a simulated mobile lab run, not a guarantee of real-world Core
 Web Vitals or Google rankings. Hosting, cache state, hardware and network conditions
 will affect visitors' results. Lighthouse's SEO score is a technical checklist,
 not a prediction of ranking.

@@ -583,7 +583,7 @@ export default function App() {
       )}
       {video && (
         <div
-          className={`video-scene ${playing ? "is-playing" : ""}`}
+          className={`video-scene ${radio.ready && !error ? "is-visible" : ""} ${!playing ? "is-waiting" : ""}`}
           ref={playerHost}
           aria-label={t("Lecteur vidéo YouTube")}
         />
@@ -769,7 +769,7 @@ export default function App() {
           </small>
         </div>
       )}
-      {video && consent && !playing && !error && (
+      {video && consent && !playing && !error && !(radio.ready && loading) && (
         <button
           className="center-play glass ui"
           aria-label={

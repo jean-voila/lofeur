@@ -13,6 +13,7 @@ export function useRadio(
   const [retry, setRetry] = useState(0);
   const [state, setState] = useState({
     playing: false,
+    ready: false,
     loading: false,
     error: "",
     unavailable: false,
@@ -26,6 +27,7 @@ export function useRadio(
   useEffect(() => {
     setState({
       playing: false,
+      ready: false,
       loading: requested,
       error: "",
       unavailable: false,
@@ -113,6 +115,10 @@ export function useRadio(
             events: {
               onReady: (e) => {
                 if (disposed) return;
+                // The iframe is responsive. YouTube may play a long advert before
+                // reporting content playback; this is not a connection failure.
+                clearTimeout(timeout);
+                update({ ready: true });
                 media.current = e.target;
                 e.target.setVolume(live.current.volume);
                 if (live.current.muted) e.target.mute();
@@ -123,7 +129,7 @@ export function useRadio(
                 if (e.data === 1) clearTimeout(timeout);
                 update({
                   playing: e.data === 1,
-                  loading: e.data === 3,
+                  loading: e.data === -1 || e.data === 3,
                   ...(e.data === 1
                     ? { error: "", title: e.target.getVideoData()?.title || "" }
                     : {}),

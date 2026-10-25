@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-25",
+  "lighthouseVersion": "13.5.0",
+  "testedUrl": "https://jean-voila.github.io/lofeur/",
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "scores": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "numericValue": 1511.7,
+      "displayValue": "1.5\u00a0s"
+    },
+    "largest-contentful-paint": {
+      "numericValue": 1634.2,
+      "displayValue": "1.6\u00a0s"
+    },
+    "total-blocking-time": {
+      "numericValue": 0,
+      "displayValue": "0\u00a0ms"
+    },
+    "cumulative-layout-shift": {
+      "numericValue": 0.003969356882567587,
+      "displayValue": "0.004"
+    },
+    "speed-index": {
+      "numericValue": 1541.384624544893,
+      "displayValue": "1.5\u00a0s"
+    }
+  },
+  "scope": "Mobile lab audit of the public GitHub Pages deployment. Not a Google-ranking or field-performance guarantee."
+}

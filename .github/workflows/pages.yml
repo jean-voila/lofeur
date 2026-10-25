@@ -46,6 +46,16 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Verify public pages and assets
+        run: npm run check:deployment
+        env:
+          SITE_URL: https://jean-voila.github.io/lofeur/
