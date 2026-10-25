@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-25",
+  "lighthouseVersion": "13.5.0",
+  "testedUrl": "http://127.0.0.1:4173/lofeur/",
+  "formFactor": "mobile",
+  "throttlingMethod": "simulate",
+  "scores": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 100,
+    "seo": 100
+  },
+  "metrics": {
+    "first-contentful-paint": {
+      "numericValue": 1505.7458,
+      "displayValue": "1.5\u00a0s"
+    },
+    "largest-contentful-paint": {
+      "numericValue": 2077.6187,
+      "displayValue": "2.1\u00a0s"
+    },
+    "total-blocking-time": {
+      "numericValue": 0,
+      "displayValue": "0\u00a0ms"
+    },
+    "cumulative-layout-shift": {
+      "numericValue": 0.002777027360482932,
+      "displayValue": "0.003"
+    },
+    "speed-index": {
+      "numericValue": 1505.7458,
+      "displayValue": "1.5\u00a0s"
+    }
+  },
+  "scope": "One local mobile lab run on the optimized production build. Not a Google-ranking or field-performance guarantee."
+}

@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
-import { auditCatalog, videoId } from "../server/catalog-health.mjs";
+import { auditCatalog, videoId } from "../maintenance/catalog-health.mjs";
 const root = new URL("../", import.meta.url);
 const source = new URL("src/stations.json", root);
 let stations = JSON.parse(await readFile(source, "utf8"));

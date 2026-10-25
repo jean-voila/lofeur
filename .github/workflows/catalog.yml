@@ -24,7 +24,7 @@ jobs:
       - run: pip install --disable-pip-version-check yt-dlp
       - run: npm ci
       - run: node scripts/refresh-catalog.mjs
-      - run: npm test && npm run build
+      - run: npm test && npm run build && npm run check:static
       - name: Save verified catalog
         run: |
           git config user.name 'lofeur catalog bot'

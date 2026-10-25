@@ -1,4 +1,5 @@
 import repairs from "./catalog-repairs.json";
+import { assetUrl } from "./site";
 import { useCallback, useEffect, useState } from "react";
 import { audioSource, youtubeId, type Station } from "./lib";
 export type Probe = {
@@ -62,38 +63,37 @@ export function useStationHealth() {
     async function refresh() {
       if (disposed) return;
       if (document.hidden) {
-        timer = setTimeout(refresh, 60000);
+        timer = setTimeout(refresh, 5 * 60000);
         return;
       }
+      setChecking(true);
       try {
-        let response = await fetch(
-          "/api/station-health" + (revision ? "?refresh=1" : ""),
-          {
-            signal: controller.signal,
-            cache: "no-store",
-          },
-        );
-        // Static hosts still receive the last audited snapshot, never a fake green status.
+        const response = await fetch(assetUrl("station-health.json"), {
+          signal: controller.signal,
+          cache: "no-cache",
+        });
         if (
-          !response.ok ||
-          !response.headers.get("content-type")?.includes("application/json")
-        )
-          response = await fetch("/station-health.json", {
-            signal: controller.signal,
-            cache: "no-store",
-          });
-        if (response.ok) {
+          response.ok &&
+          response.headers.get("content-type")?.includes("application/json")
+        ) {
           const data = await response.json();
-          if (disposed) return;
-          if (data.version === 1 && data.entries) {
+          if (
+            !disposed &&
+            data.version === 1 &&
+            data.entries &&
+            typeof data.entries === "object" &&
+            !Array.isArray(data.entries)
+          )
             setHealth(data.entries);
-            setChecking(!!data.checking);
-            timer = setTimeout(refresh, data.checking ? 10000 : 60000);
-            return;
-          }
         }
-      } catch {}
-      if (!disposed) timer = setTimeout(refresh, 60000);
+      } catch {
+        /* Keep the last snapshot when offline; playback still detects errors. */
+      } finally {
+        if (!disposed) {
+          setChecking(false);
+          timer = setTimeout(refresh, 5 * 60000);
+        }
+      }
     }
     void refresh();
     return () => {

@@ -21,12 +21,16 @@ The browser combines these results with actual playback errors, scoped to mode
 and URL. A missing audio URL for a recording means “YouTube video required,” not
 “unavailable.” No hidden YouTube players are created to probe the catalog.
 
-`npm start` provides the cached availability API. Static hosting uses the checked
-snapshot and runtime playback errors, but does not run periodic server probes.
-The six-hour GitHub maintenance job synchronizes playlist additions, finds unique
-replacement lives on the official channel, and runs tests/builds before committing.
-When published from GitHub, configure deployment to rebuild after these catalog
-commits; the maintenance job does not silently create or publish a hosting service.
+The application is now entirely static. The six-hour GitHub maintenance job
+synchronizes playlist additions, finds unique replacement lives on the official
+channel, and runs tests/builds before committing. A successful run triggers the
+Pages workflow, which deploys only when publication is explicitly enabled.
+Visitors read the resulting static JSON snapshot every five minutes while visible.
+The refresh control rereads that snapshot; it does not launch a server audit.
+
+The Node-only probe code in `maintenance/` runs during development or in GitHub
+Actions, never in a visitor's tab or a production application server. See
+`github-pages.md` for the static deployment lifecycle.
 
 Availability can vary by country or browser and can change between checks.
 The runtime error path handles those differences. An unavailable station remains

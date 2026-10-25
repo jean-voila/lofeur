@@ -19,11 +19,13 @@ Inactive soundscape elements clear their `src`, call `load()`, and leave the map
 Only 24 station rows render initially, with more available on request. Artwork
 uses lazy decoding/loading. The full playlist does not preload 74 players.
 
-Public availability checks run on the Node server or scheduled catalog worker,
-not inside hidden browser players. The server uses two metadata requests at a
-time, caps HTML reads at 3 MB, caches results for 20 minutes, and releases audio
-probe bodies immediately. It neither extracts music nor forwards streaming data.
-A static deployment reads the last health snapshot instead.
+Public availability checks run in the scheduled GitHub catalog worker, not
+inside hidden browser players or an application server. The worker uses two
+metadata requests at a time, caps HTML reads at 3 MB, and releases audio probe
+bodies immediately. The browser only fetches the published static health JSON.
+Metadata and large song artwork are deferred until listening starts. A small
+first-party brand icon is shown before playback. The body font is preloaded,
+fonts are fingerprinted, and the small critical stylesheet is inlined.
 
 Verification includes media lifecycle tests (including iframe destruction and
 source release), canvas allocation bounds, hidden-tab code paths, translation
@@ -31,3 +33,6 @@ coverage, sorting, migrations and playability parsing. A fresh isolated Chromium
 capture (`ev_f73679928fe7ea8fc4b759dad09221c739cbfe8dfe66f3231475c9f3d7eab484`)
 reported **zero YouTube/googlevideo requests** in audio-only mode and no page
 errors. This capture covers initial load, not a long-duration RAM benchmark.
+
+The subsequent static migration measured 99/100 performance in a local mobile
+Lighthouse run; see `seo.md` and `lighthouse-summary.json` for scope and metrics.

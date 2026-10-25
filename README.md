@@ -22,6 +22,7 @@
 </p>
 
 <p align="center">
+  <a href="https://jean-voila.github.io/lofeur/">Listen now</a> ·
   <a href="#a-desk-that-gets-out-of-your-way">Features</a> ·
   <a href="#make-yourself-at-home">Get started</a> ·
   <a href="#your-stations-your-rules">Custom stations</a> ·
@@ -85,18 +86,25 @@ npm run build      # TypeScript checks + production build
 npm run preview    # Serve the production build locally
 ```
 
-For a production server with automatic station checks:
+The site is **100% static and ready for GitHub Pages**. No application server is
+needed by visitors. Run `npm run preview` to inspect the production files at
+**http://127.0.0.1:4173/lofeur/**.
 
-```bash
-npm run build
-npm start
-# http://127.0.0.1:4173
-```
+The [Pages workflow](.github/workflows/pages.yml) builds a validated artifact.
+The public site is **[jean-voila.github.io/lofeur](https://jean-voila.github.io/lofeur/)**.
+Pages publication is enabled with the repository variable `PAGES_ENABLED=true`.
+See the [deployment guide](docs/github-pages.md) for the build and update lifecycle.
 
-The small Node server serves the app and caches public availability checks for
-20 minutes. Set `PORT` and `HOST` as needed behind your HTTPS reverse proxy.
-A static host can serve `dist/` too; it uses the last audited health snapshot
-and playback-error detection, without the server's background refresh.
+## Search-friendly by construction
+
+Five prerendered language pages provide real HTML, localized titles and content,
+canonical URLs, reciprocal language links, a sitemap and structured data.
+The listening guide is available to people and crawlers alike. The language
+selector updates the URL while preserving playback.
+
+A local mobile Lighthouse audit measured **99 performance / 100 accessibility /
+100 best practices / 100 SEO**. These scores are lab results, not ranking promises.
+See [SEO implementation and publication steps](docs/seo.md).
 
 ## A lighter tab
 
@@ -128,6 +136,10 @@ be rechecked; bot challenges or failed verification requests are not treated as
 proof that a station is unavailable. Use the refresh button to request a new check.
 
 <p align="center"><img src="docs/assets/preview-catalog.png" alt="A live Halloween radio followed by recorded Halloween mixes" width="100%" /></p>
+
+Availability is distributed as a static JSON snapshot and actual player errors
+remain detectable in the browser. The refresh control rereads that published
+snapshot; YouTube verification itself runs in GitHub Actions.
 
 The scheduled [catalog workflow](.github/workflows/catalog.yml) runs every six
 hours. It verifies the exact official [compilations playlist](https://www.youtube.com/playlist?list=PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4),
@@ -189,6 +201,7 @@ Shortcuts stay out of the way while typing or editing a station.
 
 ```text
 src/
+  assets/fonts/    Fingerprinted interface fonts
   App.tsx          Player, mixer, station editor and focus tools
   lib.ts           URL parsing, storage, audio catalog and timer math
   lib.test.ts      Behavioral tests
@@ -201,7 +214,7 @@ src/
   style.css        Reference-inspired desktop and mobile styles
 public/
   logo.svg         Fredoka wordmark, exported as vector paths
-  fonts/           Reference typefaces; see third-party notice
+  social-preview.jpg Local Open Graph preview
 docs/
   assets/          Banner and real browser previews
   reverse-engineering.md
@@ -222,7 +235,7 @@ ads or promotions inside the streams.
 lofeur is an independent project with no affiliation or endorsement. Original
 application code is [MIT licensed](LICENSE). Third-party media and fonts are
 **excluded** from that license. Review [`THIRD_PARTY.md`](THIRD_PARTY.md) before
-public redistribution; the repository is private while those rights are reviewed.
+public redistribution; the repository does not grant rights to third-party media or proprietary fonts.
 
 The [reference notes](docs/reverse-engineering.md) describe what was observed and
 the reconstruction's limits. The banner illustration is generated; its **lettering is real Fredoka typography**,

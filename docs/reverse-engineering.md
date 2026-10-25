@@ -55,7 +55,7 @@ The reference uses WebSockets for track updates; lofeur uses HTTP polling.
 - Alarm files: `https://desk.lofigirl.com/sounds/pomodoro/{phase,complete}.mp3`.
 - Track metadata: `https://radio.lofigirl.com/api/nowplaying/{shortcode}` with
   `radio-backup.lofigirl.com` as fallback, only for unchanged default stations.
-- Fonts: `public/fonts/`; third-party rights are described in `THIRD_PARTY.md`.
+- Fonts: `src/assets/fonts/`; third-party rights are described in `THIRD_PARTY.md`.
 
 Audio is streamed from the original sources. The ambient elements use native
 HTMLAudio looping. Seamlessness depends on the recording and browser decoder.
@@ -76,3 +76,6 @@ audio-only mode with procedural backgrounds, and 74 official recorded mixes.
 See `catalog.md` for availability and repair behavior and `performance.md` for
 the resource budget and its measurement limits. The initial 18-station table
 above documents the original reconstruction, not the full current catalog.
+
+The later static migration is described in `github-pages.md` and `seo.md`.
+The application no longer requires a runtime server.

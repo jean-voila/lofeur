@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && node scripts/build-site.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
-    "start": "node server/serve.mjs",
-    "check:stations": "node scripts/check-stations.mjs"
+    "start": "npm run preview",
+    "check:stations": "node scripts/check-stations.mjs",
+    "check:static": "node scripts/check-static.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

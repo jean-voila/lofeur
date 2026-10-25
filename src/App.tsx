@@ -39,6 +39,8 @@ import {
   Languages,
 } from "lucide-react";
 import defaults from "./catalog";
+import { assetUrl } from "./site";
+import { seoCopy } from "./seo-content";
 import { useNowPlaying } from "./now-playing";
 import {
   advanceTimer,
@@ -75,8 +77,16 @@ type TimerState = {
   deep: boolean;
 };
 function useSaved<T>(key: string, initial: T, valid?: (x: unknown) => boolean) {
-  const [value, setValue] = useState<T>(() => load(key, initial, valid));
-  useEffect(() => save(key, value), [key, value]);
+  const [value, setValue] = useState<T>(initial);
+  const [restored, setRestored] = useState(false);
+  // The first render matches the static HTML; saved preferences restore after hydration.
+  useEffect(() => {
+    setValue(load(key, initial, valid));
+    setRestored(true);
+  }, [key]);
+  useEffect(() => {
+    if (restored) save(key, value);
+  }, [key, value, restored]);
   return [value, setValue] as const;
 }
 const numberRecord = (x: unknown) =>
@@ -144,7 +154,7 @@ function Cover({ station }: { station: Station }) {
       decoding="async"
       onError={(e) => {
         e.currentTarget.onerror = null;
-        e.currentTarget.src = "/favicon.svg";
+        e.currentTarget.src = assetUrl("favicon.svg");
       }}
     />
   );
@@ -185,7 +195,6 @@ export default function App() {
     save("catalog-version", 2);
   }, [setStations]);
   const station = stations.find((s) => s.id === selected) || stations[0];
-  const song = useNowPlaying(station);
   const [theme, setTheme] = useSaved<"dark" | "light">(
     "theme",
     "dark",
@@ -252,6 +261,7 @@ export default function App() {
   const [confirmReset, setConfirmReset] = useState(false);
   const [soundActive, setSoundActive] = useState<string[]>([]);
   const radio = useRadio(station, video, consent, volume, muted);
+  const song = useNowPlaying(station, radio.requested);
   const { playing, loading, error, title, host: playerHost } = radio;
   const currentStationState = stationState(
     station,
@@ -344,8 +354,8 @@ export default function App() {
   useEffect(() => {
     document.title = timer.deadline
       ? `${formatTime(timer.remaining)} · lofeur`
-      : "lofeur · tune in. slow down.";
-  }, [timer.remaining, timer.deadline]);
+      : seoCopy[locale].title;
+  }, [timer.remaining, timer.deadline, locale]);
   useEffect(() => {
     const onFullscreen = () => setFullscreen(!!document.fullscreenElement);
     document.addEventListener("fullscreenchange", onFullscreen);
@@ -487,6 +497,7 @@ export default function App() {
         setMenu(false);
         setSettings(false);
         setSceneSettings(false);
+        document.querySelector(".site-guide")?.removeAttribute("open");
       }
       if (e.code === "Space") {
         e.preventDefault();
@@ -579,10 +590,10 @@ export default function App() {
       )}
       <div className="scene-shade" />
       <header className="topbar ui">
-        <a className="brand" href="/" aria-label="lofeur, accueil">
+        <a className="brand" href={assetUrl("")} aria-label="lofeur, accueil">
           <img
             className="wordmark"
-            src="/logo.svg"
+            src={assetUrl("logo.svg")}
             alt="lofeur"
             width="184"
             height="54"
@@ -722,12 +733,18 @@ export default function App() {
       >
         <div className="now-cover">
           <Cover
-            station={song?.art ? { ...station, cover: song.art } : station}
+            station={
+              !radio.requested
+                ? { ...station, cover: assetUrl("favicon.svg") }
+                : song?.art
+                  ? { ...station, cover: song.art }
+                  : station
+            }
           />
         </div>
         <div className="now-copy">
           <span className="muted small">{t("À l’écoute")}</span>
-          <h1>{song?.artist || station.name}</h1>
+          <h2>{song?.artist || station.name}</h2>
           <p title={song?.title || title || station.description}>
             {song?.title || title || station.description}
           </p>
@@ -896,6 +913,7 @@ export default function App() {
                               .live && (
                               <span
                                 className="live-dot"
+                                role="img"
                                 aria-label={t("En direct")}
                               />
                             )}{" "}
@@ -1092,7 +1110,11 @@ export default function App() {
         >
           <div className="radio-top">
             {currentStationState.live && (
-              <span className="live-dot" aria-label={t("En direct")} />
+              <span
+                className="live-dot"
+                role="img"
+                aria-label={t("En direct")}
+              />
             )}
             <strong>
               {loading
@@ -1211,6 +1233,7 @@ export default function App() {
           </div>
           <div
             className="phase-track"
+            role="group"
             aria-label={t("Phase {phase} sur 8", { phase: timer.phase })}
           >
             {Array.from({ length: 8 }, (_, i) => (
@@ -1397,7 +1420,11 @@ export default function App() {
               </IconButton>
             </div>
             <div className="about-content">
-              <img className="about-wordmark" src="/logo.svg" alt="lofeur" />
+              <img
+                className="about-wordmark"
+                src={assetUrl("logo.svg")}
+                alt="lofeur"
+              />
               <p>{t("Un bureau, de la musique et le temps de se poser.")}</p>
               <p>
                 {t(

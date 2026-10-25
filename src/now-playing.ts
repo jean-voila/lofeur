@@ -5,11 +5,12 @@ import type { Station } from "./lib";
 type Song = { artist: string; title: string; art: string };
 // Metadata is only requested for an unchanged public default. Personal URLs
 // must never be paired with a default station's unrelated track information.
-export function useNowPlaying(station: Station) {
+export function useNowPlaying(station: Station, enabled = true) {
   const [song, setSong] = useState<Song | null>(null);
   useEffect(() => {
     setSong(null);
     if (
+      !enabled ||
       !defaults.some(
         (s) =>
           s.kind === "live" &&
@@ -83,6 +84,6 @@ export function useNowPlaying(station: Station) {
       clearInterval(interval);
       document.removeEventListener("visibilitychange", refresh);
     };
-  }, [station.id, station.url]);
+  }, [station.id, station.url, enabled]);
   return song;
 }

@@ -11,7 +11,7 @@ Lofi Desk's JavaScript bundles are not included in the application.
 | Station covers                                 | cdn.lofigirl.com                                  | Remote image URLs in `src/stations.json`                                                               |
 | Twelve ambient recordings and their thumbnails | desk.lofigirl.com                                 | Original public WAV/image URLs in `src/lib.ts`                                                         |
 | Pomodoro alarm recordings                      | desk.lofigirl.com/sounds/pomodoro                 | Original public MP3 URLs                                                                               |
-| Gopher and Bolota typefaces                    | Public webfont assets served by desk.lofigirl.com | Local files in `public/fonts/` to preserve the reference typography without cross-origin font failures |
+| Gopher and Bolota typefaces                    | Public webfont assets served by desk.lofigirl.com | Local files in `src/assets/fonts/` to preserve the reference typography without cross-origin font failures |
 | Icons                                          | Lucide                                            | ISC license, installed through npm                                                                     |
 | lofeur logo                                    | Fredoka typeface                                  | SVG outlines; font and SIL OFL 1.1 license included in `docs/branding/`                                |
 | README banner                                  | Original AI-generated illustration                | Generation prompt and provenance in `docs/brand.md`                                                    |

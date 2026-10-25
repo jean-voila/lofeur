@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-export const HEALTH_TTL = 20 * 60 * 1000;
 export function videoId(url) {
   try {
     const u = new URL(url);
@@ -122,47 +120,4 @@ export async function auditCatalog(stations, previous = {}) {
   }
   await Promise.all([worker(), worker()]);
   return { version: 1, checkedAt: Date.now(), entries };
-}
-let cache,
-  flight,
-  lastAttempt = 0;
-async function loadSnapshot() {
-  try {
-    return JSON.parse(
-      await readFile(
-        new URL("../public/station-health.json", import.meta.url),
-        "utf8",
-      ),
-    );
-  } catch {
-    return { version: 1, checkedAt: 0, entries: {} };
-  }
-}
-export async function healthEndpoint(req, res) {
-  if (req.url?.split("?")[0] !== "/api/station-health") return false;
-  cache ??= await loadSnapshot();
-  if (
-    !flight &&
-    (Date.now() - cache.checkedAt > HEALTH_TTL ||
-      req.url.includes("refresh=1")) &&
-    Date.now() - lastAttempt > 60000
-  ) {
-    lastAttempt = Date.now();
-    flight = readFile(new URL("../src/stations.json", import.meta.url), "utf8")
-      .then(JSON.parse)
-      .then((stations) => auditCatalog(stations, cache.entries))
-      .then((result) => {
-        cache = result;
-      })
-      .catch(() => {})
-      .finally(() => {
-        flight = null;
-      });
-  }
-  res.writeHead(200, {
-    "Content-Type": "application/json",
-    "Cache-Control": "no-store",
-  });
-  res.end(JSON.stringify({ ...cache, checking: !!flight }));
-  return true;
 }

@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { auditCatalog } from "../server/catalog-health.mjs";
+import { auditCatalog } from "../maintenance/catalog-health.mjs";
 const root = new URL("../", import.meta.url);
 const stations = JSON.parse(
   await readFile(new URL("src/stations.json", root), "utf8"),

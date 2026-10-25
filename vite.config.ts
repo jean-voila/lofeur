@@ -1,18 +1,16 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
-// @ts-expect-error Node-only middleware is deliberately kept outside the client bundle.
-import { healthEndpoint } from "./server/catalog-health.mjs";
-export default defineConfig({
-  plugins: [
-    react(),
-    {
-      name: "station-health",
-      configureServer(server) {
-        server.middlewares.use(async (req, res, next) => {
-          if (!(await healthEndpoint(req, res))) next();
-        });
-      },
-    },
-  ],
-  base: "./",
+// @ts-expect-error Shared build configuration is native ESM, without client dependencies.
+import { siteConfig } from "./site.config.mjs";
+export default defineConfig(({ command, isPreview, mode }) => {
+  const site = siteConfig({
+    ...loadEnv(mode, process.cwd(), ""),
+    ...process.env,
+  });
+  return {
+    plugins: [react()],
+    base: command === "serve" && !isPreview ? "/" : site.base,
+    define: { "import.meta.env.VITE_SITE_URL": JSON.stringify(site.url) },
+    build: { manifest: true },
+  };
 });
