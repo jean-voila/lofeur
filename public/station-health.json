@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "checkedAt": 1793482921671,
+  "checkedAt": 1793513841596,
   "entries": {
     "rFZHOHl-L8A": {
       "youtube": {
@@ -12,7 +12,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/lofi/radio.mp3"
       },
-      "checkedAt": 1793482903114
+      "checkedAt": 1793513804508
     },
     "4xDzrJKXOOY": {
       "youtube": {
@@ -24,7 +24,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/synthwave/radio.mp3"
       },
-      "checkedAt": 1793482903168
+      "checkedAt": 1793513804465
     },
     "VAlMDl00mYY": {
       "youtube": {
@@ -36,7 +36,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/lofi-sleep/radio.mp3"
       },
-      "checkedAt": 1793482903585
+      "checkedAt": 1793513805380
     },
     "0sfDth4lMLc": {
       "youtube": {
@@ -48,7 +48,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/halloween-lofi/radio.mp3"
       },
-      "checkedAt": 1793482903425
+      "checkedAt": 1793513805290
     },
     "1Tl2FtV06qo": {
       "youtube": {
@@ -60,7 +60,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/asian-lofi/radio.mp3"
       },
-      "checkedAt": 1793482904054
+      "checkedAt": 1793513806062
     },
     "E2vONfzoyRI": {
       "youtube": {
@@ -72,19 +72,19 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/jazz-lofi/radio.mp3"
       },
-      "checkedAt": 1793482903953
+      "checkedAt": 1793513805987
     },
     "nI725iVsyoQ": {
       "youtube": {
         "available": false,
         "live": false,
-        "reason": "last-known"
+        "reason": "unavailable"
       },
       "audio": {
         "available": true,
         "url": "https://radio.lofigirl.com/listen/sleep-ambient/radio.mp3"
       },
-      "checkedAt": 1793482904508
+      "checkedAt": 1793513806687
     },
     "S_MOd40zlYU": {
       "youtube": {
@@ -96,7 +96,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/dark-ambient/radio.mp3"
       },
-      "checkedAt": 1793482904281
+      "checkedAt": 1793513807065
     },
     "N0snMcR6aaA": {
       "youtube": {
@@ -108,7 +108,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/peaceful-piano/radio.mp3"
       },
-      "checkedAt": 1793482904718
+      "checkedAt": 1793513807404
     },
     "IxPANmjPaek": {
       "youtube": {
@@ -120,7 +120,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/medieval/radio.mp3"
       },
-      "checkedAt": 1793482904974
+      "checkedAt": 1793513807893
     },
     "0muHFBSiybw": {
       "youtube": {
@@ -132,7 +132,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/summer-restful-holidays/radio.mp3"
       },
-      "checkedAt": 1793482905016
+      "checkedAt": 1793513808080
     },
     "A8jDx9TLMQc": {
       "youtube": {
@@ -144,7 +144,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/relaxing-jazz/radio.mp3"
       },
-      "checkedAt": 1793482905401
+      "checkedAt": 1793513808686
     },
     "jXAEIWcGXwE": {
       "youtube": {
@@ -156,7 +156,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/classical-lofi/radio.mp3"
       },
-      "checkedAt": 1793482905418
+      "checkedAt": 1793513809019
     },
     "GSfT7H87zq4": {
       "youtube": {
@@ -168,7 +168,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/synth-ambient/radio.mp3"
       },
-      "checkedAt": 1793482905835
+      "checkedAt": 1793513809345
     },
     "E_XmwjgRLz8": {
       "youtube": {
@@ -180,7 +180,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/chill-guitar/radio.mp3"
       },
-      "checkedAt": 1793482905916
+      "checkedAt": 1793513809777
     },
     "56llPN9tS88": {
       "youtube": {
@@ -192,7 +192,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/bossa-lofi/radio.mp3"
       },
-      "checkedAt": 1793482906196
+      "checkedAt": 1793513810598
     },
     "XSXEaikz0Bc": {
       "youtube": {
@@ -204,7 +204,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/christmas-lofi/radio.mp3"
       },
-      "checkedAt": 1793482906564
+      "checkedAt": 1793513811275
     },
     "CwPCy1GLS38": {
       "youtube": {
@@ -216,7 +216,7 @@
         "available": true,
         "url": "https://radio.lofigirl.com/listen/sad-lofi/radio.mp3"
       },
-      "checkedAt": 1793482906469
+      "checkedAt": 1793513810486
     },
     "vadHXNBy4jQ": {
       "youtube": {
@@ -228,7 +228,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482906910
+      "checkedAt": 1793513811315
     },
     "_jH2oTNRe7g": {
       "youtube": {
@@ -240,7 +240,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482906902
+      "checkedAt": 1793513812159
     },
     "P12XxVMbYXg": {
       "youtube": {
@@ -252,7 +252,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907170
+      "checkedAt": 1793513812686
     },
     "O_97HkFMhFk": {
       "youtube": {
@@ -264,7 +264,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907179
+      "checkedAt": 1793513812039
     },
     "yUXwdnOJ_z0": {
       "youtube": {
@@ -276,7 +276,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907616
+      "checkedAt": 1793513812852
     },
     "XVFUtEh9zrY": {
       "youtube": {
@@ -288,7 +288,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907656
+      "checkedAt": 1793513813284
     },
     "2oJqY4nhL-c": {
       "youtube": {
@@ -300,7 +300,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907989
+      "checkedAt": 1793513813648
     },
     "fhL67fnDXcU": {
       "youtube": {
@@ -312,7 +312,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482907994
+      "checkedAt": 1793513814050
     },
     "3G3vzexbf64": {
       "youtube": {
@@ -324,7 +324,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482908366
+      "checkedAt": 1793513815061
     },
     "JCKBaJDRMw4": {
       "youtube": {
@@ -336,7 +336,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482908263
+      "checkedAt": 1793513814336
     },
     "fsPRybb-xXg": {
       "youtube": {
@@ -348,7 +348,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482908613
+      "checkedAt": 1793513815224
     },
     "n2w3VdXRJjw": {
       "youtube": {
@@ -360,7 +360,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482908613
+      "checkedAt": 1793513816020
     },
     "eTP5PZ8NoeU": {
       "youtube": {
@@ -372,7 +372,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482908953
+      "checkedAt": 1793513815938
     },
     "W5FI97ovWog": {
       "youtube": {
@@ -384,7 +384,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909028
+      "checkedAt": 1793513816945
     },
     "NH8uI4EJ0bo": {
       "youtube": {
@@ -396,7 +396,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909362
+      "checkedAt": 1793513816766
     },
     "Fxqv9xdLMG4": {
       "youtube": {
@@ -408,7 +408,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909292
+      "checkedAt": 1793513817520
     },
     "fQ35eh6k0RI": {
       "youtube": {
@@ -420,7 +420,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909728
+      "checkedAt": 1793513817893
     },
     "cyzx45mupcQ": {
       "youtube": {
@@ -432,7 +432,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909642
+      "checkedAt": 1793513818205
     },
     "53gNFOqDFcE": {
       "youtube": {
@@ -444,7 +444,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482909896
+      "checkedAt": 1793513818592
     },
     "CBSlu_VMS9U": {
       "youtube": {
@@ -456,7 +456,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910143
+      "checkedAt": 1793513818956
     },
     "S-4hwfyK-XQ": {
       "youtube": {
@@ -468,7 +468,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910323
+      "checkedAt": 1793513819453
     },
     "7ccH8u8fj8Y": {
       "youtube": {
@@ -480,7 +480,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910409
+      "checkedAt": 1793513819878
     },
     "7O9jGGm7PlE": {
       "youtube": {
@@ -492,7 +492,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910620
+      "checkedAt": 1793513820329
     },
     "Z_8f5IWuTFg": {
       "youtube": {
@@ -504,7 +504,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910758
+      "checkedAt": 1793513820518
     },
     "qwdzIECTqn8": {
       "youtube": {
@@ -516,7 +516,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482910885
+      "checkedAt": 1793513820912
     },
     "8gJ716dhStg": {
       "youtube": {
@@ -528,7 +528,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482911054
+      "checkedAt": 1793513821607
     },
     "FEKpdb4Kkp4": {
       "youtube": {
@@ -540,7 +540,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482911173
+      "checkedAt": 1793513821644
     },
     "UJs6__K7gSY": {
       "youtube": {
@@ -552,7 +552,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482911556
+      "checkedAt": 1793513822391
     },
     "qEN5ZHDi1Kg": {
       "youtube": {
@@ -564,7 +564,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482911605
+      "checkedAt": 1793513822373
     },
     "8b3fqIBrNW0": {
       "youtube": {
@@ -576,7 +576,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482912020
+      "checkedAt": 1793513823347
     },
     "M8J9zHyyUYc": {
       "youtube": {
@@ -588,7 +588,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482911890
+      "checkedAt": 1793513823236
     },
     "deRDilpdOnE": {
       "youtube": {
@@ -600,7 +600,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482912194
+      "checkedAt": 1793513823947
     },
     "rwLv6YPiGsE": {
       "youtube": {
@@ -612,7 +612,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482912288
+      "checkedAt": 1793513823978
     },
     "aWV6uv8Que0": {
       "youtube": {
@@ -624,7 +624,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482912697
+      "checkedAt": 1793513824677
     },
     "ohyiTPgAxgY": {
       "youtube": {
@@ -636,7 +636,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482912660
+      "checkedAt": 1793513824748
     },
     "xsDnEj2Hx4Q": {
       "youtube": {
@@ -648,7 +648,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913085
+      "checkedAt": 1793513825559
     },
     "lA9FONoiuFA": {
       "youtube": {
@@ -660,7 +660,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913049
+      "checkedAt": 1793513825528
     },
     "R_K7UqHplyA": {
       "youtube": {
@@ -672,7 +672,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913434
+      "checkedAt": 1793513826449
     },
     "wgwcBTrY9og": {
       "youtube": {
@@ -684,7 +684,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913519
+      "checkedAt": 1793513826281
     },
     "VXY2P8vKgV4": {
       "youtube": {
@@ -696,7 +696,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913772
+      "checkedAt": 1793513827122
     },
     "VDtjKuS2R3E": {
       "youtube": {
@@ -708,7 +708,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482913994
+      "checkedAt": 1793513827276
     },
     "D6TSIHxNzfU": {
       "youtube": {
@@ -720,7 +720,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482914058
+      "checkedAt": 1793513828077
     },
     "CFGLoQIhmow": {
       "youtube": {
@@ -732,7 +732,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482914398
+      "checkedAt": 1793513828066
     },
     "MadEqVeRFuM": {
       "youtube": {
@@ -744,7 +744,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482914598
+      "checkedAt": 1793513828768
     },
     "WBnjO3zEwCM": {
       "youtube": {
@@ -756,7 +756,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482914850
+      "checkedAt": 1793513828920
     },
     "8Wpy_DOeaP8": {
       "youtube": {
@@ -768,7 +768,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482914859
+      "checkedAt": 1793513829521
     },
     "9zb_6EgG0F8": {
       "youtube": {
@@ -780,7 +780,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482915362
+      "checkedAt": 1793513829638
     },
     "w4TNGhSj2tc": {
       "youtube": {
@@ -792,7 +792,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482915233
+      "checkedAt": 1793513830223
     },
     "cYPJaHT5f3E": {
       "youtube": {
@@ -804,7 +804,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482915618
+      "checkedAt": 1793513830504
     },
     "CMNyHBx1gak": {
       "youtube": {
@@ -816,7 +816,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482915850
+      "checkedAt": 1793513830963
     },
     "mmKguZohAck": {
       "youtube": {
@@ -828,7 +828,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482916038
+      "checkedAt": 1793513831237
     },
     "1YBtzAAChU8": {
       "youtube": {
@@ -840,7 +840,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482916373
+      "checkedAt": 1793513831697
     },
     "EeRfSNx5RhE": {
       "youtube": {
@@ -852,7 +852,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482916457
+      "checkedAt": 1793513832170
     },
     "0MiR7bC9B5o": {
       "youtube": {
@@ -864,7 +864,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482916928
+      "checkedAt": 1793513832615
     },
     "Z-_TTyZUOLk": {
       "youtube": {
@@ -876,7 +876,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482917233
+      "checkedAt": 1793513833273
     },
     "g6LhK0wTemE": {
       "youtube": {
@@ -888,7 +888,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482916918
+      "checkedAt": 1793513832910
     },
     "1bvbsx-hpFc": {
       "youtube": {
@@ -900,7 +900,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482917307
+      "checkedAt": 1793513833604
     },
     "ldDtjQkLsss": {
       "youtube": {
@@ -912,7 +912,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482917797
+      "checkedAt": 1793513834015
     },
     "TlWYgGyNnJo": {
       "youtube": {
@@ -924,7 +924,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482917783
+      "checkedAt": 1793513834449
     },
     "i43tkaTXtwI": {
       "youtube": {
@@ -936,7 +936,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482918300
+      "checkedAt": 1793513834796
     },
     "O7RG-B6N1Vw": {
       "youtube": {
@@ -948,7 +948,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482918279
+      "checkedAt": 1793513835283
     },
     "-R0UYHS8A_A": {
       "youtube": {
@@ -960,7 +960,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482918759
+      "checkedAt": 1793513835779
     },
     "Nyx6SBixRE8": {
       "youtube": {
@@ -972,7 +972,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482918845
+      "checkedAt": 1793513836048
     },
     "1fueZCTYkpA": {
       "youtube": {
@@ -984,7 +984,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919124
+      "checkedAt": 1793513836887
     },
     "n61ULEU7CO0": {
       "youtube": {
@@ -996,7 +996,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919667
+      "checkedAt": 1793513837535
     },
     "l98w9OSKVNA": {
       "youtube": {
@@ -1008,7 +1008,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919117
+      "checkedAt": 1793513836841
     },
     "gnZImHvA0ME": {
       "youtube": {
@@ -1020,7 +1020,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919510
+      "checkedAt": 1793513837646
     },
     "TURbeWK2wwg": {
       "youtube": {
@@ -1032,7 +1032,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919845
+      "checkedAt": 1793513838221
     },
     "_tV5LEBDs7w": {
       "youtube": {
@@ -1044,7 +1044,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482919956
+      "checkedAt": 1793513838400
     },
     "BTYAsjAVa3I": {
       "youtube": {
@@ -1056,7 +1056,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482920131
+      "checkedAt": 1793513838964
     },
     "zFhfksjf_mY": {
       "youtube": {
@@ -1068,7 +1068,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482920294
+      "checkedAt": 1793513839210
     },
     "wAPCSnAhhC8": {
       "youtube": {
@@ -1080,7 +1080,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482920579
+      "checkedAt": 1793513839895
     },
     "-FlxM_0S2lA": {
       "youtube": {
@@ -1092,7 +1092,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482920835
+      "checkedAt": 1793513840829
     },
     "lTRiuFIWV54": {
       "youtube": {
@@ -1104,7 +1104,7 @@
         "available": null,
         "url": null
       },
-      "checkedAt": 1793482920732
+      "checkedAt": 1793513839953
     }
   }
 }
