@@ -19,16 +19,26 @@ const playlist = extract(
 if (playlist.channel_id !== channel)
   throw new Error("Unexpected playlist owner; catalog left untouched.");
 const ids = new Set(stations.map((s) => videoId(s.url)));
+// Removed or private videos stay listed in the playlist with a null or
+// placeholder title ("[Deleted video]", "[Private video]"); never import them.
+const usableTitle = (title) =>
+  typeof title === "string" &&
+  title.trim().length > 0 &&
+  !/^\[(deleted|private) video\]$/i.test(title.trim());
 for (const item of playlist.entries || []) {
   if (
     !/^[\w-]{11}$/.test(item.id) ||
     ids.has(item.id) ||
+    !usableTitle(item.title) ||
+    ["private", "needs_auth", "subscriber_only", "premium_only"].includes(
+      item.availability,
+    ) ||
     ["is_live", "is_upcoming"].includes(item.live_status)
   )
     continue;
   stations.push({
     id: `mix-${item.id}`,
-    name: item.title,
+    name: item.title.trim(),
     url: `https://www.youtube.com/watch?v=${item.id}`,
     description: "Lofi Girl · Compilations & Mixes",
     cover: `https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`,
