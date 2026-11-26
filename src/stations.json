@@ -940,5 +940,15 @@
     "kind": "video",
     "duration": 28800,
     "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
+  },
+  {
+    "id": "mix-q3ywMgG2QEE",
+    "name": "LofiSleep8HRemake",
+    "url": "https://www.youtube.com/watch?v=q3ywMgG2QEE",
+    "description": "Lofi Girl · Compilations & Mixes",
+    "cover": "https://i.ytimg.com/vi/q3ywMgG2QEE/mqdefault.jpg",
+    "kind": "video",
+    "duration": 28800,
+    "playlist": "PL6NdkXsPL07KN01gH2vucrHCEyyNmVEx4"
   }
 ]
